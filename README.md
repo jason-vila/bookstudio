@@ -9,7 +9,7 @@
   <img src="https://github.com/Jason-Vila/bookstudio/blob/master/src/main/webapp/images/dashboard-view.png" width="800" alt="Dashboard Preview" />
 </p>
 
-### Loan Interface
+### Loans Interface
 <p align="center">
   <img src="https://github.com/Jason-Vila/bookstudio/blob/master/src/main/webapp/images/loan-view.png" width="800" alt="Dashboard Preview" />
 </p>
