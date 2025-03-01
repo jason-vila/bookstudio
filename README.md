@@ -81,7 +81,7 @@ The folder structure is organized as follows:
 ```
 /src/main/java
   /dao                  --> Data Access Objects (DB interaction)
-  /model                --> Data models representing the entities
+  /models               --> Data models representing the entities
   /services             --> Business logic handling
   /servlets             --> HTTP request handling
   /utils                --> Utility classes (e.g., MySqlConexion, SessionFilter)
