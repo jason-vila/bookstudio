@@ -116,7 +116,7 @@ This project was developed for personal growth as I am starting in web developme
 
 3. **Install and Configure Tomcat 8.5 in Eclipse EE:**
    - In Eclipse EE, navigate to `Window > Preferences > Server > Runtime Environments`.
-   - Click on `Add Server` and select **Tomcat 8.5**.
+   - Click on `Add Server` and select **Apache Tomcat v8.5**.
    - Browse to the Tomcat installation directory and click `Finish`.
    - Once added, right-click on the project in the Project Explorer, select `Run As > Run on Server` to deploy the project to Tomcat.
 
