@@ -130,13 +130,20 @@ public class MySqlConexion {
    - Browse to the cloned repository folder and import the project.
 
 3. **Configure the Database:**
-   - Ensure MySQL is installed.
-   - Create a database named `bookstudio_db`.
-   - Update the connection parameters in `MySqlConexion.java` with your MySQL credentials.
+   - Ensure MySQL is installed and running.
+   - **Run the SQL script** found at:
+     ```
+     /database/bookstudio_db.sql
+     ```
+     This script will create the schema `bookstudio_db` and populate it with initial data, including an **administrator** user.
+   - Update the connection parameters in `MySqlConexion.java` with your MySQL credentials (username, password, etc.).
+   - **Default Admin Credentials** (once you run the script):
+     - **Username:** `Admin`  
+     - **Password:** `Admin123@`
 
 4. **Run the Application:**
    - Start Tomcat 8.5 from Eclipse or deploy the project to your Tomcat server.
-   - Access the application via your browser at `http://localhost:8080/bookstudio` (or your configured context path).
+   - Access the application in your browser at `http://localhost:8080/bookstudio` (or your configured context path).
 
 ## Usage
 
