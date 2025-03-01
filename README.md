@@ -29,8 +29,8 @@ The system provides functionalities such as:
   - Loans
   - Books
   - Authors
-  - Courses
   - Publishers
+  - Courses
   - Students
   - Users
   - Profile
