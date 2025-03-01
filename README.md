@@ -52,7 +52,7 @@ The **BookStudio** project follows the **Model-View-Controller (MVC)** architect
 2. **View:**
    - The user interface is built with **JSP** and located in `/src/main/webapp`.
    - Reusable components like `header`, `sidebar`, and `buttonTheme` are in the `includes` folder.
-   - Page-specific scripts are located in `/webapp/js`, and CSS is used for styling.
+   - Page-specific scripts are located in `/webapp/js`.
 
 3. **Controller:**
    - **Servlets** handle HTTP requests, interact with the **services** layer, and forward results to the appropriate JSP for rendering.
