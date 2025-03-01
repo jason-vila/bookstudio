@@ -114,8 +114,8 @@ This project was developed for personal growth as I am starting in web developme
    - Navigate to `File > Import > Existing Maven Projects`.
    - Browse to the cloned repository folder and import the project.
 
-3. **Install and Configure Tomcat 8.5 in Eclipse:**
-   - In Eclipse, navigate to `Window > Preferences > Server > Runtime Environments`.
+3. **Install and Configure Tomcat 8.5 in Eclipse EE:**
+   - In Eclipse EE, navigate to `Window > Preferences > Server > Runtime Environments`.
    - Click on `Add Server` and select **Tomcat 8.5**.
    - Browse to the Tomcat installation directory and click `Finish`.
    - Once added, right-click on the project in the Project Explorer, select `Run As > Run on Server` to deploy the project to Tomcat.
@@ -133,7 +133,7 @@ This project was developed for personal growth as I am starting in web developme
      - **Password:** `Admin123@`
 
 5. **Run the Application:**
-   - Start Tomcat 8.5 from Eclipse or deploy the project to your Tomcat server.
+   - Start Tomcat 8.5 from Eclipse EE or deploy the project to your Tomcat server.
    - Access the application in your browser at `http://localhost:8080/bookstudio` (or your configured context path).
 
 ## 🔌 Database Connection Configuration
