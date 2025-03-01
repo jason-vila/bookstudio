@@ -181,6 +181,11 @@ public class MySqlConexion {
     }
 }
 ```
+## 🚀 Usage
+
+- **Login:** Use the login page to authenticate.
+- **Dashboard:** Once logged in, access the dashboard to manage loans, books, authors, courses, publishers, students, users, and your profile.
+- **User Roles:** The system supports two roles (Administrator and Librarian) with appropriate permissions for each role.
 
 ## 🛠️ Technologies and Dependencies
 
@@ -209,12 +214,6 @@ public class MySqlConexion {
 - **Build Tool**: Maven
 - **Application Server**: Tomcat 8.5
 - **Database**: MySQL (access via JDBC)
-
-## 🚀 Usage
-
-- **Login:** Use the login page to authenticate.
-- **Dashboard:** Once logged in, access the dashboard to manage loans, books, authors, courses, publishers, students, users, and your profile.
-- **User Roles:** The system supports two roles (Administrator and Librarian) with appropriate permissions for each role.
 
 ## 🤝 Contributing
 
