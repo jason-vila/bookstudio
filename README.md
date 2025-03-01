@@ -41,6 +41,10 @@ There are two user roles:
 - **Administrator**
 - **Librarian**
 
+## 🎯 Purpose
+
+This project was developed for personal growth as I am starting in web development. It serves as a learning platform to apply various technologies and design patterns in a real-world scenario.
+
 ## 🏗️ Architecture
 
 The **BookStudio** project follows the **Model-View-Controller (MVC)** architecture to maintain a clean separation of concerns. Here's the breakdown of the key components:
@@ -97,10 +101,6 @@ The folder structure is organized as follows:
 ```
 
 - **`WEB-INF/includes`**: This folder contains reusable JSP components (e.g., `header`, `sidebar`, `buttonTheme`). These are included in the main JSPs to maintain a consistent structure across the application without code duplication.
-
-## 🎯 Purpose
-
-This project was developed for personal growth as I am starting in web development. It serves as a learning platform to apply various technologies and design patterns in a real-world scenario.
 
 ## ⚙️ Installation and Setup
 
