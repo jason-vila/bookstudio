@@ -19,7 +19,7 @@
   <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/login-view.png" width="800" alt="Login Preview" />
 </p>
 
-## Description
+## 📜 Description
 
 BookStudio is a comprehensive web-based library management system designed for managing book loans at a fictional university library. The primary focus is on streamlining the lending process with clear status tracking (loaned/returned).
 
