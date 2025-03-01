@@ -14,7 +14,7 @@
   <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/loan-view.png" width="800" alt="Dashboard Preview" />
 </p>
 
-### User Authentication
+### Login Interface
 <p align="center">
   <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/login-view.png" width="800" alt="Login Preview" />
 </p>
@@ -40,6 +40,63 @@ The system includes **light and dark modes**.
 There are two user roles:
 - **Administrator**
 - **Librarian**
+
+## Architecture
+
+The **BookStudio** project follows the **Model-View-Controller (MVC)** architecture to maintain a clean separation of concerns. Here's the breakdown of the key components:
+
+1. **Model:**
+   - Contains the business logic and data models (e.g., Books, Loans, Authors, Students).
+   - Interacts with the database through **DAO** classes.
+
+2. **View:**
+   - The user interface is built with **JSP** and located in `/src/main/webapp`.
+   - Reusable components like `header`, `sidebar`, and `buttonTheme` are in the `includes` folder.
+   - Page-specific scripts are located in `/webapp/js`, and CSS is used for styling.
+
+3. **Controller:**
+   - **Servlets** handle HTTP requests, interact with the **services** layer, and forward results to the appropriate JSP for rendering.
+
+4. **Database:**
+   - The MySQL database is accessed using the DAO pattern.
+   - Database connections are managed by the `MySqlConexion` class.
+
+5. **Services:**
+   - Contains business logic and interacts with the DAO layer to process data.
+
+6. **Utils (Backend):**
+   - Contains utility classes like **MySqlConexion** and **SessionFilter** for managing database connections and user sessions.
+
+7. **Utils (Frontend):**
+   - JavaScript helper functions for frontend utilities, such as **color-modes.js** (for light/dark mode), **datatables-setup.js** (for DataTables), and **toast.js** (for notifications).
+
+8. **AJAX Requests:**
+   - Asynchronous requests are handled between the client and server to improve user experience.
+   - JavaScript files in `/webapp/js` manage these requests.
+
+## Folder Structure
+
+The folder structure is organized as follows:
+
+```
+/src/main/java
+  /dao                  --> Data Access Objects (DB interaction)
+  /model                --> Data models representing the entities
+  /services             --> Business logic handling
+  /servlets             --> HTTP request handling
+  /utils                --> Utility classes (e.g., MySqlConexion, SessionFilter)
+
+/src/main/webapp
+  /images                --> Static images (logo, screenshots)
+  /css                   --> Stylesheets (CSS files)
+  /js                    --> JavaScript files for page-specific logic, including AJAX requests
+  /utils                 --> Utility JS files (e.g., color-modes.js, datatables-setup.js)
+  /WEB-INF
+    /includes            --> Reusable JSP components (header, sidebar, buttonTheme, etc.)
+  /jsp                   --> Main JSP pages
+```
+
+- **`WEB-INF/includes`**: This folder contains reusable JSP components (e.g., `header`, `sidebar`, `buttonTheme`). These are included in the main JSPs to maintain a consistent structure across the application without code duplication.
 
 ## Purpose
 
