@@ -121,7 +121,7 @@ public class MySqlConexion {
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/Jason-Vila/bookstudio.git
+   git clone https://github.com/jason-vila/bookstudio.git
    ```
 
 2. **Import the Project in Eclipse:**
