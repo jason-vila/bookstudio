@@ -4,17 +4,17 @@
 
 ## Screenshots
 
-### Dashboard Interface
+### 📊 Dashboard Interface
 <p align="center">
   <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/dashboard-view.png" width="800" alt="Dashboard Preview" />
 </p>
 
-### Loans Interface
+### 📚 Loans Interface
 <p align="center">
   <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/loan-view.png" width="800" alt="Dashboard Preview" />
 </p>
 
-### Login Interface
+### 🔑 Login Interface
 <p align="center">
   <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/login-view.png" width="800" alt="Login Preview" />
 </p>
@@ -41,7 +41,7 @@ There are two user roles:
 - **Administrator**
 - **Librarian**
 
-## Architecture
+## 🏗️ Architecture
 
 The **BookStudio** project follows the **Model-View-Controller (MVC)** architecture to maintain a clean separation of concerns. Here's the breakdown of the key components:
 
@@ -74,7 +74,7 @@ The **BookStudio** project follows the **Model-View-Controller (MVC)** architect
    - Asynchronous requests are handled between the client and server to improve user experience.
    - JavaScript files in `/webapp/js` manage these requests.
 
-## Folder Structure
+## 📂 Folder Structure
 
 The folder structure is organized as follows:
 
@@ -98,11 +98,11 @@ The folder structure is organized as follows:
 
 - **`WEB-INF/includes`**: This folder contains reusable JSP components (e.g., `header`, `sidebar`, `buttonTheme`). These are included in the main JSPs to maintain a consistent structure across the application without code duplication.
 
-## Purpose
+## 🎯 Purpose
 
 This project was developed for personal growth as I am starting in web development. It serves as a learning platform to apply various technologies and design patterns in a real-world scenario.
 
-## Database Connection Configuration
+## 🔌 Database Connection Configuration
 
 The MySQL connection is configured in:
 ```
@@ -146,7 +146,7 @@ public class MySqlConexion {
 }
 ```
 
-## Technologies and Dependencies
+## 🛠️ Technologies and Dependencies
 
 ### Web Libraries (Loaded via CDN)
 - **jQuery**: v3.7.1
@@ -174,7 +174,7 @@ public class MySqlConexion {
 - **Application Server**: Tomcat 8.5
 - **Database**: MySQL (access via JDBC)
 
-## Installation and Setup
+## ⚙️ Installation and Setup
 
 1. **Clone the Repository:**
    ```bash
@@ -202,16 +202,16 @@ public class MySqlConexion {
    - Start Tomcat 8.5 from Eclipse or deploy the project to your Tomcat server.
    - Access the application in your browser at `http://localhost:8080/bookstudio` (or your configured context path).
 
-## Usage
+## 🚀 Usage
 
 - **Login:** Use the login page to authenticate.
 - **Dashboard:** Once logged in, access the dashboard to manage loans, books, authors, courses, publishers, students, users, and your profile.
 - **User Roles:** The system supports two roles (Administrator and Librarian) with appropriate permissions for each role.
 
-## Contributing
+## 🤝 Contributing
 
 This is a personal project aimed at learning and growth, but contributions are welcome. If you have suggestions, improvements, or bug fixes, feel free to fork the repository and submit a pull request.
 
-## License
+## 📜 License
 
 This project is not licensed.
