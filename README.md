@@ -1,22 +1,22 @@
 <p align="center">
-  <img src="https://github.com/jason-vila/bookstudio/blob/master/src/main/webapp/images/bookstudio-logo.png" width="250" alt="BookStudio Logo" />
+  <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/bookstudio-logo.png" width="250" alt="BookStudio Logo" />
 </p>
 
 ## Screenshots
 
 ### Dashboard Interface
 <p align="center">
-  <img src="https://github.com/jason-vila/bookstudio/blob/master/src/main/webapp/images/dashboard-view.png" width="800" alt="Dashboard Preview" />
+  <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/dashboard-view.png" width="800" alt="Dashboard Preview" />
 </p>
 
 ### Loans Interface
 <p align="center">
-  <img src="https://github.com/jason-vila/bookstudio/blob/master/src/main/webapp/images/loan-view.png" width="800" alt="Dashboard Preview" />
+  <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/loan-view.png" width="800" alt="Dashboard Preview" />
 </p>
 
 ### User Authentication
 <p align="center">
-  <img src="https://github.com/jason-vila/bookstudio/blob/master/src/main/webapp/images/login-view.png" width="800" alt="Login Preview" />
+  <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/login-view.png" width="800" alt="Login Preview" />
 </p>
 
 ## Description
