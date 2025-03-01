@@ -109,12 +109,18 @@ This project was developed for personal growth as I am starting in web developme
    git clone https://github.com/jason-vila/bookstudio.git
    ```
 
-2. **Import the Project in Eclipse:**
-   - Open Eclipse.
+2. **Import the Project in Eclipse EE:**
+   - Open Eclipse EE.
    - Navigate to `File > Import > Existing Maven Projects`.
    - Browse to the cloned repository folder and import the project.
 
-3. **Configure the Database:**
+3. **Install and Configure Tomcat 8.5 in Eclipse:**
+   - In Eclipse, navigate to `Window > Preferences > Server > Runtime Environments`.
+   - Click on `Add Server` and select **Tomcat 8.5**.
+   - Browse to the Tomcat installation directory and click `Finish`.
+   - Once added, right-click on the project in the Project Explorer, select `Run As > Run on Server` to deploy the project to Tomcat.
+
+4. **Configure the Database:**
    - Ensure MySQL is installed and running.
    - **Run the SQL script** found at:
      ```
@@ -126,7 +132,7 @@ This project was developed for personal growth as I am starting in web developme
      - **Username:** `Admin`  
      - **Password:** `Admin123@`
 
-4. **Run the Application:**
+5. **Run the Application:**
    - Start Tomcat 8.5 from Eclipse or deploy the project to your Tomcat server.
    - Access the application in your browser at `http://localhost:8080/bookstudio` (or your configured context path).
 
