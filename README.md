@@ -102,6 +102,34 @@ The folder structure is organized as follows:
 
 This project was developed for personal growth as I am starting in web development. It serves as a learning platform to apply various technologies and design patterns in a real-world scenario.
 
+## ⚙️ Installation and Setup
+
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/jason-vila/bookstudio.git
+   ```
+
+2. **Import the Project in Eclipse:**
+   - Open Eclipse.
+   - Navigate to `File > Import > Existing Maven Projects`.
+   - Browse to the cloned repository folder and import the project.
+
+3. **Configure the Database:**
+   - Ensure MySQL is installed and running.
+   - **Run the SQL script** found at:
+     ```
+     /database/bookstudio_db.sql
+     ```
+     This script will create the schema `bookstudio_db` and populate it with initial data, including an **administrator** user.
+   - Update the connection parameters in `MySqlConexion.java` with your MySQL credentials (username, password, etc.).
+   - **Default Admin Credentials** (once you run the script):
+     - **Username:** `Admin`  
+     - **Password:** `Admin123@`
+
+4. **Run the Application:**
+   - Start Tomcat 8.5 from Eclipse or deploy the project to your Tomcat server.
+   - Access the application in your browser at `http://localhost:8080/bookstudio` (or your configured context path).
+
 ## 🔌 Database Connection Configuration
 
 The MySQL connection is configured in:
@@ -173,34 +201,6 @@ public class MySqlConexion {
 - **Build Tool**: Maven
 - **Application Server**: Tomcat 8.5
 - **Database**: MySQL (access via JDBC)
-
-## ⚙️ Installation and Setup
-
-1. **Clone the Repository:**
-   ```bash
-   git clone https://github.com/jason-vila/bookstudio.git
-   ```
-
-2. **Import the Project in Eclipse:**
-   - Open Eclipse.
-   - Navigate to `File > Import > Existing Maven Projects`.
-   - Browse to the cloned repository folder and import the project.
-
-3. **Configure the Database:**
-   - Ensure MySQL is installed and running.
-   - **Run the SQL script** found at:
-     ```
-     /database/bookstudio_db.sql
-     ```
-     This script will create the schema `bookstudio_db` and populate it with initial data, including an **administrator** user.
-   - Update the connection parameters in `MySqlConexion.java` with your MySQL credentials (username, password, etc.).
-   - **Default Admin Credentials** (once you run the script):
-     - **Username:** `Admin`  
-     - **Password:** `Admin123@`
-
-4. **Run the Application:**
-   - Start Tomcat 8.5 from Eclipse or deploy the project to your Tomcat server.
-   - Access the application in your browser at `http://localhost:8080/bookstudio` (or your configured context path).
 
 ## 🚀 Usage
 
