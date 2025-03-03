@@ -8,7 +8,7 @@ public class DbConnection {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost/bookstudio_db?useSSL=false&useTimezone=true&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "rootmysql";
+    private static final String PASSWORD = "your_password";
     
     public static Connection getConexion() {
         Connection con = null;
