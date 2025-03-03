@@ -75,7 +75,7 @@ $(document).ready(function () {
                 }
             },
             error: function () {
-                showToast("An unexpected error occurred.", "error");
+                showToast("Se produjo un error inesperado.", "error");
                 $("#txtUsername").removeClass("is-invalid");
                 $("#txtPassword").removeClass("is-invalid");
             },

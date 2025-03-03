@@ -83,6 +83,8 @@ function placeholderColorEditSelect() {
  *****************************************/
 
 function generateRow(publisher) {
+	const userRole = sessionStorage.getItem('userRole');
+	
     return `
         <tr>
             <td class="align-middle text-start">${publisher.publisherId}</td>
@@ -105,10 +107,13 @@ function generateRow(publisher) {
 					    data-bs-toggle="modal" data-bs-target="#detailsPublisherModal" data-id="${publisher.publisherId}">
 					    <i class="bi bi-eye"></i>
 					</button>
-					<button class="btn btn-sm btn-icon-hover" data-tooltip="tooltip" data-bs-placement="top" title="Editar"
-					    data-bs-toggle="modal" data-bs-target="#editPublisherModal" data-id="${publisher.publisherId}">
-					    <i class="bi bi-pencil"></i>
-					</button>
+					${userRole === 'administrador' ? 
+						`<button class="btn btn-sm btn-icon-hover" data-tooltip="tooltip" data-bs-placement="top" title="Editar"
+						    data-bs-toggle="modal" data-bs-target="#editPublisherModal" data-id="${publisher.publisherId}">
+						    <i class="bi bi-pencil"></i>
+						</button>`
+	                    : ''
+                    }
                 </div>
             </td>
         </tr>

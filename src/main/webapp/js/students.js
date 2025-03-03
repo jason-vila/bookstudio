@@ -105,6 +105,8 @@ function placeholderColorDateInput() {
  *****************************************/
 
 function generateRow(student) {
+	const userRole = sessionStorage.getItem('userRole');
+	
     return `
         <tr>
             <td class="align-middle text-start">${student.studentId}</td>
@@ -124,10 +126,14 @@ function generateRow(student) {
 					    data-bs-toggle="modal" data-bs-target="#detailsStudentModal" data-id="${student.studentId}">
 					    <i class="bi bi-eye"></i>
 					</button>
-					<button class="btn btn-sm btn-icon-hover" data-tooltip="tooltip" data-bs-placement="top" title="Editar"
-					    data-bs-toggle="modal" data-bs-target="#editStudentModal" data-id="${student.studentId}">
-					    <i class="bi bi-pencil"></i>
-					</button>
+					
+					${userRole === 'administrador' ? 
+						`<button class="btn btn-sm btn-icon-hover" data-tooltip="tooltip" data-bs-placement="top" title="Editar"
+						    data-bs-toggle="modal" data-bs-target="#editStudentModal" data-id="${student.studentId}">
+						    <i class="bi bi-pencil"></i>
+						</button>`
+	                    : ''
+                    }
                 </div>
             </td>
         </tr>

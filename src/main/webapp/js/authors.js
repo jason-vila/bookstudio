@@ -105,6 +105,8 @@ function placeholderColorDateInput() {
  *****************************************/
 
 function generateRow(author) {
+	const userRole = sessionStorage.getItem('userRole');
+	
     return `
         <tr>
             <td class="align-middle text-start">${author.authorId}</td>
@@ -127,10 +129,13 @@ function generateRow(author) {
 					    data-bs-toggle="modal" data-bs-target="#detailsAuthorModal" data-id="${author.authorId}">
 					    <i class="bi bi-eye"></i>
 					</button>
-					<button class="btn btn-sm btn-icon-hover" data-tooltip="tooltip" data-bs-placement="top" title="Editar"
-					    data-bs-toggle="modal" data-bs-target="#editAuthorModal" data-id="${author.authorId}">
-					    <i class="bi bi-pencil"></i>
-					</button>
+					${userRole === 'administrador' ? 
+						`<button class="btn btn-sm btn-icon-hover" data-tooltip="tooltip" data-bs-placement="top" title="Editar"
+						    data-bs-toggle="modal" data-bs-target="#editAuthorModal" data-id="${author.authorId}">
+						    <i class="bi bi-pencil"></i>
+						</button>`
+	                    : ''
+                    }
                 </div>
             </td>
         </tr>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="auto">
@@ -11,6 +12,9 @@
     <link href="images/light-icon.png" rel="icon" media="(prefers-color-scheme: dark)">
 </head>
 <body>
+	<!-- Set user role from session -->
+	<c:set var="userRole" value="${sessionScope.role}" />
+
 	<!-- ===================== Header ===================== -->
 	<jsp:include page="WEB-INF/includes/header.jsp"></jsp:include>
 	
@@ -28,11 +32,13 @@
 			    <h5 class="card-title text-body-emphasis mb-2 mt-2">Tabla Autores</h5>
 			    
 			    <!-- Add Button -->
-			    <button class="btn btn-custom-primary d-flex align-items-center" id="btnAdd" 
-	                data-bs-toggle="modal" data-bs-target="#addAuthorModal" aria-label="Agregar autor" disabled>
-	                <i class="bi bi-plus-lg me-2"></i>
-	                Agregar
-	            </button>
+			    <c:if test="${userRole == 'administrador'}">
+	                <button class="btn btn-custom-primary d-flex align-items-center" id="btnAdd" 
+		                data-bs-toggle="modal" data-bs-target="#addAuthorModal" aria-label="Agregar autor" disabled>
+		                <i class="bi bi-plus-lg me-2"></i>
+		                Agregar
+		            </button>
+	            </c:if>
 			</header>
 			
 			<!-- Card Body -->
