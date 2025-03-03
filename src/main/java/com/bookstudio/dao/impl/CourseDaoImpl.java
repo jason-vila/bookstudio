@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.bookstudio.dao.CourseDao;
 import com.bookstudio.models.Course;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class CourseDaoImpl implements CourseDao {
 
@@ -19,7 +19,7 @@ public class CourseDaoImpl implements CourseDao {
         
         String sql = "SELECT CourseID, Name, Level, Description, Status FROM Courses";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -44,7 +44,7 @@ public class CourseDaoImpl implements CourseDao {
         
         String sql = "SELECT CourseID, Name, Level, Description, Status FROM Courses WHERE CourseID = ?";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
              
             ps.setString(1, courseId);
@@ -68,7 +68,7 @@ public class CourseDaoImpl implements CourseDao {
     public Course createCourse(Course course) {
         String sql = "INSERT INTO Courses (Name, Level, Description, Status) VALUES (?, ?, ?, ?)";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
         	ps.setString(1, course.getName());
@@ -97,7 +97,7 @@ public class CourseDaoImpl implements CourseDao {
     public Course updateCourse(Course course) {
         String sql = "UPDATE Courses SET Name = ?, Level = ?, Description = ?, Status = ? WHERE CourseID = ?";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
 
         	ps.setString(1, course.getName());
@@ -129,7 +129,7 @@ public class CourseDaoImpl implements CourseDao {
                 Status = 'activo'
         """;
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {

@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.bookstudio.dao.UserDao;
 import com.bookstudio.models.User;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class UserDaoImpl implements UserDao {
 
@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
         
         String sql = "SELECT UserID, Username, Email, FirstName, LastName, Password, Role, ProfilePhoto FROM Users";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -47,7 +47,7 @@ public class UserDaoImpl implements UserDao {
         
         String sql = "SELECT UserID, Username, Email, FirstName, LastName, Password, Role, ProfilePhoto FROM Users WHERE UserID = ?";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
              
             ps.setString(1, userId);
@@ -79,7 +79,7 @@ public class UserDaoImpl implements UserDao {
         String sqlInsert = "INSERT INTO Users (Username, Email, FirstName, LastName, Password, Role, ProfilePhoto) " +
                            "VALUES (?, ?, ?, ?, ?, ?, ?)";
         
-        try (Connection cn = MySqlConexion.getConexion()) {
+        try (Connection cn = DbConnection.getConexion()) {
             try (PreparedStatement ps = cn.prepareStatement(sqlCheckUsername)) {
                 ps.setString(1, user.getUsername());
                 try (ResultSet rs = ps.executeQuery()) {
@@ -126,7 +126,7 @@ public class UserDaoImpl implements UserDao {
         String sql = "UPDATE Users SET FirstName = ?, LastName = ?, Password = ?, Role = ?, ProfilePhoto = ? " +
                      "WHERE UserID = ?";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
 
         	ps.setString(1, user.getFirstName());
@@ -151,7 +151,7 @@ public class UserDaoImpl implements UserDao {
         String sql = "DELETE FROM Users WHERE UserID = ?";
         
         boolean isDeleted = false;
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, userId);
             int rowsAffected = ps.executeUpdate();

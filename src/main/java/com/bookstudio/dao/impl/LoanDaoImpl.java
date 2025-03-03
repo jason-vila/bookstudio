@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.bookstudio.dao.LoanDao;
 import com.bookstudio.models.Loan;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class LoanDaoImpl implements LoanDao {
 
@@ -39,7 +39,7 @@ public class LoanDaoImpl implements LoanDao {
                 Students s ON lo.StudentID = s.StudentID
         """;
 
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -97,7 +97,7 @@ public class LoanDaoImpl implements LoanDao {
                 lo.LoanID = ?
         """;
 
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, loanId);
             try (ResultSet rs = ps.executeQuery()) {
@@ -155,7 +155,7 @@ public class LoanDaoImpl implements LoanDao {
                 lo.LoanID = ?
         """;
 
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement psInsert = cn.prepareStatement(sqlInsert, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
         	psInsert.setString(1, loan.getBookId());
@@ -225,7 +225,7 @@ public class LoanDaoImpl implements LoanDao {
                 lo.LoanID = ?
         """;
 
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement psUpdate = cn.prepareStatement(sqlUpdate)) {
 
         	psUpdate.setString(1, loan.getStudentId());
@@ -266,7 +266,7 @@ public class LoanDaoImpl implements LoanDao {
         String sqlUpdateBook = "UPDATE Books SET LoanedCopies = LoanedCopies - ? WHERE BookID = ?";
 
         int quantity = 0;
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement psSelect = cn.prepareStatement(sqlSelect)) {
             
             psSelect.setString(1, loanId);

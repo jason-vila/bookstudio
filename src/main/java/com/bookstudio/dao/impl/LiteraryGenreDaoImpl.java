@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.bookstudio.dao.LiteraryGenreDao;
 import com.bookstudio.models.LiteraryGenre;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class LiteraryGenreDaoImpl implements LiteraryGenreDao {
 
@@ -22,7 +22,7 @@ public class LiteraryGenreDaoImpl implements LiteraryGenreDao {
             FROM LiteraryGenres
         """;
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
              

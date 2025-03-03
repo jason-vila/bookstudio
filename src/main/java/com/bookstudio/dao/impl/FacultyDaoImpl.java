@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.bookstudio.dao.FacultyDao;
 import com.bookstudio.models.Faculty;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class FacultyDaoImpl implements FacultyDao {
 
@@ -22,7 +22,7 @@ public class FacultyDaoImpl implements FacultyDao {
             FROM Faculties
         """;
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
              

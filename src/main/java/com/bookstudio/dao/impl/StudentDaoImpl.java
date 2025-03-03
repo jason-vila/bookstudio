@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.bookstudio.dao.StudentDao;
 import com.bookstudio.models.Student;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class StudentDaoImpl implements StudentDao {
 
@@ -23,7 +23,7 @@ public class StudentDaoImpl implements StudentDao {
                      "FROM Students s " +
                      "JOIN Faculties f ON s.FacultyID = f.FacultyID";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -63,7 +63,7 @@ public class StudentDaoImpl implements StudentDao {
             WHERE s.StudentID = ?
         """;
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
              
             ps.setString(1, studentId);
@@ -106,7 +106,7 @@ public class StudentDaoImpl implements StudentDao {
         ResultSet rs = null;
         
         try {
-            cn = MySqlConexion.getConexion();
+            cn = DbConnection.getConexion();
             
             ps = cn.prepareStatement(sqlCheckDni);
             ps.setString(1, student.getDni());
@@ -178,7 +178,7 @@ public class StudentDaoImpl implements StudentDao {
         ResultSet rs = null;
         
         try {
-            cn = MySqlConexion.getConexion();
+            cn = DbConnection.getConexion();
             
             ps = cn.prepareStatement(sqlCheckEmail);
             ps.setString(1, student.getEmail());
@@ -230,7 +230,7 @@ public class StudentDaoImpl implements StudentDao {
             WHERE Status = 'activo'
         """;
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
              

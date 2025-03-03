@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.bookstudio.dao.BookDao;
 import com.bookstudio.models.Book;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class BookDaoImpl implements BookDao {
 
@@ -38,7 +38,7 @@ public class BookDaoImpl implements BookDao {
                 Genres g ON b.GenreID = g.GenreID
         """;
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -95,7 +95,7 @@ public class BookDaoImpl implements BookDao {
                 b.BookID = ?
         """;
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             ps.setString(1, idLibro);
             try (ResultSet rs = ps.executeQuery()) {
@@ -150,7 +150,7 @@ public class BookDaoImpl implements BookDao {
                 b.BookID = ?
         """;
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement psInsert = cn.prepareStatement(sqlInsert, PreparedStatement.RETURN_GENERATED_KEYS)) {
              
             psInsert.setString(1, book.getTitle());
@@ -218,7 +218,7 @@ public class BookDaoImpl implements BookDao {
                 b.BookID = ?
         """;
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement psUpdate = cn.prepareStatement(sqlUpdate)) {
              
             psUpdate.setString(1, book.getTitle());
@@ -268,7 +268,7 @@ public class BookDaoImpl implements BookDao {
                 AND TotalCopies > LoanedCopies
         """;
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {

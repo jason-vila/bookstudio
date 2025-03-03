@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.bookstudio.dao.PublisherDao;
 import com.bookstudio.models.Publisher;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class PublisherDaoImpl implements PublisherDao {
 
@@ -29,7 +29,7 @@ public class PublisherDaoImpl implements PublisherDao {
                 LiteraryGenres lg ON p.LiteraryGenreID = lg.LiteraryGenreID
         """;
 
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -72,7 +72,7 @@ public class PublisherDaoImpl implements PublisherDao {
                 p.PublisherID = ?
         """;
 
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             
             ps.setString(1, publisherId);
@@ -113,7 +113,7 @@ public class PublisherDaoImpl implements PublisherDao {
             WHERE LiteraryGenreID = ?
         """;
 
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement psInsert = cn.prepareStatement(sqlInsert, PreparedStatement.RETURN_GENERATED_KEYS)) {
             
         	psInsert.setString(1, publisher.getName());
@@ -165,7 +165,7 @@ public class PublisherDaoImpl implements PublisherDao {
             WHERE LiteraryGenreID = ?
         """;
 
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement psUpdate = cn.prepareStatement(sqlUpdate)) {
             
         	psUpdate.setString(1, publisher.getName());
@@ -209,7 +209,7 @@ public class PublisherDaoImpl implements PublisherDao {
                 Status = 'activo'
         """;
 
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 

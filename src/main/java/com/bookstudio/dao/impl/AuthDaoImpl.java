@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import com.bookstudio.dao.AuthDao;
 import com.bookstudio.models.User;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class AuthDaoImpl implements AuthDao {
 
@@ -19,7 +19,7 @@ public class AuthDaoImpl implements AuthDao {
                      "FROM Users " +
                      "WHERE Username = ? AND BINARY Password = ?";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
             
             ps.setString(1, username);

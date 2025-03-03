@@ -11,7 +11,7 @@ import java.util.Map;
 
 import com.bookstudio.dao.DashboardDao;
 import com.bookstudio.models.MonthlyLoanComparison;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class DashboardDaoImpl implements DashboardDao {
 
@@ -85,7 +85,7 @@ public class DashboardDaoImpl implements DashboardDao {
         """;
 
         Map<Integer, Double> data = new HashMap<>();
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -112,7 +112,7 @@ public class DashboardDaoImpl implements DashboardDao {
         """;
 
         List<MonthlyLoanComparison> comparisonList = new ArrayList<>();
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
 
             ps.setInt(1, year1);
@@ -136,7 +136,7 @@ public class DashboardDaoImpl implements DashboardDao {
     }
 
     private int getCount(String sql) {
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
@@ -151,7 +151,7 @@ public class DashboardDaoImpl implements DashboardDao {
 
     private Map<Integer, Integer> getMonthlyData(String sql) {
         Map<Integer, Integer> data = new HashMap<>();
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 

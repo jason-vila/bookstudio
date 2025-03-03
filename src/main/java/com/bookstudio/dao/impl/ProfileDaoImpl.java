@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import com.bookstudio.dao.ProfileDao;
 import com.bookstudio.models.User;
-import com.bookstudio.utils.MySqlConexion;
+import com.bookstudio.utils.DbConnection;
 
 public class ProfileDaoImpl implements ProfileDao {
 
@@ -14,7 +14,7 @@ public class ProfileDaoImpl implements ProfileDao {
     public User updateProfile(User user) {
         String sql = "UPDATE Users SET FirstName = ?, LastName = ?, Password = ? WHERE UserID = ?";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
              
             ps.setString(1, user.getFirstName());
@@ -36,7 +36,7 @@ public class ProfileDaoImpl implements ProfileDao {
     public User updateProfilePhoto(User user) {
         String sql = "UPDATE Users SET ProfilePhoto = ? WHERE UserID = ?";
         
-        try (Connection cn = MySqlConexion.getConexion();
+        try (Connection cn = DbConnection.getConexion();
              PreparedStatement ps = cn.prepareStatement(sql)) {
              
             ps.setBytes(1, user.getProfilePhoto());
