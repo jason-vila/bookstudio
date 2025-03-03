@@ -100,9 +100,9 @@
 	                <div class="card-body sombra">
 	                    <h5 class="card-title d-flex align-items-center">
 	                     	<i class="bi pe-none me-2 bi-file-earmark-text"></i>
-	                     	Préstamos Activos
+	                     	Préstamos
 	                    </h5>
-	                    <p class="card-text text-body-emphasis" id="totalLoans">Préstamos Activos</p>
+	                    <p class="card-text text-body-emphasis" id="totalLoans">Préstamos</p>
 	                </div>
 	            </div>
 	        </article>

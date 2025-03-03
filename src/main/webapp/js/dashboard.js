@@ -121,11 +121,11 @@ $(document).ready(function() {
             loanComparisonChart.data.datasets[1].data = year2Data;
             loanComparisonChart.update();
 
-            $('#totalBooks').text(data.totalActiveBooks + " Libros");
-            $('#totalAuthors').text(data.totalActiveAuthors + " Autores");
-            $('#totalPublishers').text(data.totalActivePublishers + " Editoriales");
-            $('#totalCourses').text(data.totalActiveCourses + " Cursos");
-            $('#totalStudents').text(data.totalActiveStudents + " Estudiantes");
+            $('#totalBooks').text(data.totalActiveBooks + " Libros Activos");
+            $('#totalAuthors').text(data.totalActiveAuthors + " Autores Activos");
+            $('#totalPublishers').text(data.totalActivePublishers + " Editoriales Activas");
+            $('#totalCourses').text(data.totalActiveCourses + " Cursos Activos");
+            $('#totalStudents').text(data.totalActiveStudents + " Estudiantes Activos");
             $('#totalLoans').text(data.totalActiveLoans + " Préstamos Activos");
         },
         error: function(err) {
