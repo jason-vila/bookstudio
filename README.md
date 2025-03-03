@@ -63,16 +63,16 @@ The **BookStudio** project follows the **Model-View-Controller (MVC)** architect
 
 4. **Database:**
    - The MySQL database is accessed using the DAO pattern.
-   - Database connections are managed by the `MySqlConexion` class.
+   - Database connections are managed by the `DbConnection` class.
 
 5. **Services:**
    - Contains business logic and interacts with the DAO layer to process data.
 
 6. **Utils (Backend):**
-   - Contains utility classes like **MySqlConexion** and **SessionFilter** for managing database connections and user sessions.
+   - Contains utility classes like **DbConnection** and **SessionFilter** for managing database connections and user sessions.
 
 7. **Utils (Frontend):**
-   - JavaScript helper functions for frontend utilities, such as **color-modes.js** (for light/dark mode), **datatables-setup.js** (for DataTables), and **toast.js** (for notifications).
+   - JavaScript helper functions for frontend utilities, such as **color-modes.js** (for light/dark mode), **datatables-setup.js** (for DataTables), and **toast.js** (for alerts).
 
 8. **AJAX Requests:**
    - Asynchronous requests are handled between the client and server to improve user experience.
@@ -84,11 +84,14 @@ The folder structure is organized as follows:
 
 ```
 /src/main/java
-  /dao                  --> Data Access Objects (DB interaction)
-  /models               --> Data models representing the entities
-  /services             --> Business logic handling
-  /servlets             --> HTTP request handling
-  /utils                --> Utility classes (e.g., MySqlConexion, SessionFilter)
+  /com
+    /bookstudio
+      /dao                  --> Data Access Objects (DB interaction)
+        /impl               --> Implementations of DAO interfaces
+      /models               --> Data models representing the entities
+      /services             --> Business logic handling
+      /servlets             --> HTTP request handling
+      /utils                --> Utility classes (e.g., DbConnection, SessionFilter)
 
 /src/main/webapp
   /images                --> Static images (logo, screenshots)
@@ -97,7 +100,7 @@ The folder structure is organized as follows:
   /utils                 --> Utility JS files (e.g., color-modes.js, datatables-setup.js)
   /WEB-INF
     /includes            --> Reusable JSP components (header, sidebar, buttonTheme, etc.)
-  /jsp                   --> Main JSP pages
+  .jsp                   --> Main JSP pages
 ```
 
 - **`WEB-INF/includes`**: This folder contains reusable JSP components (e.g., `header`, `sidebar`, `buttonTheme`). These are included in the main JSPs to maintain a consistent structure across the application without code duplication.
@@ -129,7 +132,7 @@ The folder structure is organized as follows:
      /database/bookstudio_db.sql
      ```
      This script will create the schema `bookstudio_db` and populate it with initial data, including an **administrator** user.
-   - Update the connection parameters in `MySqlConexion.java` with your MySQL credentials (username, password, etc.).
+   - Update the connection parameters in `DbConnection.java` with your MySQL credentials (username, password, etc.).
    - **Default Admin Credentials** (once you run the script):
      - **Username:** `Admin`  
      - **Password:** `Admin123@`
@@ -142,20 +145,19 @@ The folder structure is organized as follows:
 
 The MySQL connection is configured in:
 ```
-/src/main/java/utils/MySqlConexion.java
+/src/main/java/com/bookstudio/utils/DbConnection.java
 ```
 
 Example of an optimized connection configuration:
 
 ```java
-package utils;
+package com.bookstudio.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class MySqlConexion {
-    // Database connection parameters
+public class DbConnection {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost/bookstudio_db?useSSL=false&useTimezone=true&serverTimezone=UTC";
     private static final String USER = "root";
@@ -164,10 +166,8 @@ public class MySqlConexion {
     public static Connection getConexion() {
         Connection con = null;
         try {
-            // Register the JDBC driver
             Class.forName(DRIVER);
             
-            // Establish connection
             con = DriverManager.getConnection(URL, USER, PASSWORD);
             
         } catch (ClassNotFoundException e) {
