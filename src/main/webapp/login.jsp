@@ -101,11 +101,12 @@
 		</jsp:include>
 	</div>
 
-	<!-- JavaScript -->
+	<!-- External Libraries -->
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+	
+	<!-- Custom Scripts -->
 	<script src="js/login.js"></script>
 	<script src="utils/toast.js"></script>
 	<script src="utils/password.js"></script>

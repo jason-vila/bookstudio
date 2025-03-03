@@ -814,7 +814,7 @@ function initializeCropper(file, $cropperContainer, $imageToCrop) {
     reader.readAsDataURL(file);
 }
 
-$('#addUserProfilePhoto, #addUserProfilePhoto').on('change', function () {
+$('#addUserProfilePhoto, #editUserProfilePhoto').on('change', function () {
     const file = this.files[0];
 
     if (file && file.type.startsWith('image/')) {
