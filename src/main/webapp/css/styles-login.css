@@ -20,7 +20,7 @@
     --bg-primary-color: var(--bg-primary-dark);
     --bg-secondary-color: var(--bg-secondary-dark);
     --bg-tertiary-color: var(--bg-tertiary-dark);
-    --bs-border-color: #27272A;
+    --bs-border-color: #2E2E31;
     --bs-body-bg: var(--bg-secondary-dark);
 }
 
@@ -157,6 +157,11 @@ a {
     border-color: var(--bs-border-color);
     outline: 0;
     box-shadow: 0 0 0 1px var(--bs-border-color);
+}
+
+/* Card Header */
+.card-header {
+    border-bottom: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
 }
 
 /* Toast notification */

@@ -21,7 +21,7 @@
 		<!-- ===================== Main Content ==================== -->
 		<main class="w-100 mx-4" style="max-width: 384px;">
 			<!-- Card Container -->
-			<section class="card">
+			<section class="card border">
 				<!-- Card header -->
 				<header class="card-header text-center bg-body-secondary mt-2 mb-2">
 					<h4 class="fw-bold mb-0 text-start">Iniciar Sesión</h4>
