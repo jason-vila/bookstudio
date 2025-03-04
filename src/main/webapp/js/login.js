@@ -53,6 +53,7 @@ $(document).ready(function () {
 
         $("#loginBtn").prop("disabled", true);
         $("#spinner").removeClass("d-none");
+		$("#loginText").addClass("d-none");
         
         const formData = {
             type: "login",
@@ -82,6 +83,7 @@ $(document).ready(function () {
             complete: function() {
                 $("#loginBtn").prop("disabled", false);
                 $("#spinner").addClass("d-none");
+				$("#loginText").removeClass("d-none");
             }
         });
     });

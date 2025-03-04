@@ -68,8 +68,8 @@
 						
 						<!-- Login Button -->
 						<button type="submit" class="btn btn-custom-primary w-100" id="loginBtn">
-		                    <span id="spinner" class="spinner-border spinner-border-sm me-2 d-none" role="status"></span>
-		                    Iniciar Sesión
+		                    <span id="spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+		                    <span id="loginText">Iniciar Sesión</span>
 		                </button>
 
 						<!-- Google Button -->
