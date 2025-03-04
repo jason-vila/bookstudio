@@ -28,10 +28,10 @@
 	    <section class="row">
 	        <!-- Total Books -->
 	        <article class="col-md-4">
-	            <div class="card text-primary border-start-primary bg-body-secondary border mb-3">
+	            <div class="card border-start-primary bg-body-secondary border mb-3">
 	                <div class="card-body">
 	                    <h5 class="card-title d-flex align-items-center">
-	                        <i class="bi pe-none me-2 bi-journal-bookmark"></i>
+	                        <i class="bi pe-none me-2 bi-journal-bookmark text-primary"></i>
 	                        Libros
 	                    </h5>
 	                    <p class="card-text text-body-emphasis" id="totalBooks">Libros</p>
@@ -41,10 +41,10 @@
 	
 	        <!-- Total Authors -->
 	        <article class="col-md-4">
-	            <div class="card text-success border-start-success bg-body-secondary border mb-3">
+	            <div class="card border-start-success bg-body-secondary border mb-3">
 	                <div class="card-body">
 	                    <h5 class="card-title d-flex align-items-center">
-	                    	<i class="bi pe-none me-2 bi-person-plus"></i>
+	                    	<i class="bi pe-none me-2 bi-person-plus text-success"></i>
 	                     	Autores
 	                 	</h5>
 	                    <p class="card-text text-body-emphasis" id="totalAuthors">Autores</p>
@@ -54,10 +54,10 @@
 	
 	        <!-- Total Publishers -->
 	        <article class="col-md-4">
-	            <div class="card text-warning border-start-warning bg-body-secondary border mb-3">
+	            <div class="card border-start-warning bg-body-secondary border mb-3">
 	                <div class="card-body sombra">
 	                    <h5 class="card-title d-flex align-items-center">
-							<i class="bi pe-none me-2 bi-map"></i>
+							<i class="bi pe-none me-2 bi-map text-warning"></i>
 	                    	Editoriales
 	                    </h5>
 	                    <p class="card-text text-body-emphasis" id="totalPublishers">Editoriales</p>
@@ -70,10 +70,10 @@
 	    <section class="row">
 	        <!-- Courses -->
 	        <article class="col-md-4">
-	            <div class="card text-info border-start-info bg-body-secondary border mb-3">
+	            <div class="card border-start-info bg-body-secondary border mb-3">
 	                <div class="card-body sombra">
 	                    <h5 class="card-title d-flex align-items-center">
-							<i class="bi pe-none me-2 bi-stickies"></i>
+							<i class="bi pe-none me-2 bi-stickies text-info"></i>
 							Cursos
 	                    </h5>
 	                    <p class="card-text text-body-emphasis" id="totalCourses">Cursos</p>
@@ -83,10 +83,10 @@
 	       
 	        <!-- Students -->
 	        <article class="col-md-4">
-	            <div class="card text-secondary border-start-secondary bg-body-secondary border mb-3">
+	            <div class="card border-start-secondary bg-body-secondary border mb-3">
 	                <div class="card-body sombra">
 	                    <h5 class="card-title d-flex align-items-center">
-	                   		<i class="bi pe-none me-2 bi-mortarboard"></i>
+	                   		<i class="bi pe-none me-2 bi-mortarboard text-secondary"></i>
 	                   		Estudiantes
 	                    </h5>
 	                    <p class="card-text text-body-emphasis" id="totalStudents">Estudiantes</p>
@@ -96,10 +96,10 @@
 	
 	        <!-- Active Loans -->
 	        <article class="col-md-4">
-	            <div class="card text-danger border-start-danger bg-body-secondary border mb-3">
+	            <div class="card border-start-danger bg-body-secondary border mb-3">
 	                <div class="card-body sombra">
 	                    <h5 class="card-title d-flex align-items-center">
-	                     	<i class="bi pe-none me-2 bi-file-earmark-text"></i>
+	                     	<i class="bi pe-none me-2 bi-file-earmark-text text-danger"></i>
 	                     	Préstamos
 	                    </h5>
 	                    <p class="card-text text-body-emphasis" id="totalLoans">Préstamos</p>
