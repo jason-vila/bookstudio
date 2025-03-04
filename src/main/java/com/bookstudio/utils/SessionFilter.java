@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 public class SessionFilter implements Filter {
     private static final String LOGIN_PAGE = "/login.jsp";
     private static final String LOGIN_SERVLET = "/LoginServlet";
+    private static final String DASHBOARD_PAGE = "/dashboard.jsp";
     private static final String STATIC_RESOURCES = "/css/";
     private static final String JS_RESOURCES = "/js/";
     private static final String IMAGES_RESOURCES = "/images/";
@@ -31,27 +32,41 @@ public class SessionFilter implements Filter {
         
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-
-        String contextPath = httpRequest.getContextPath();
-        String requestURI = httpRequest.getRequestURI();
-        String relativePath = requestURI.substring(contextPath.length());
-
-        if (relativePath.equals(LOGIN_PAGE) || 
-            relativePath.equals(LOGIN_SERVLET) || 
-            relativePath.contains(STATIC_RESOURCES) || 
-            relativePath.contains(JS_RESOURCES) || 
-            relativePath.contains(UTILS_RESOURCES) || 
-            relativePath.contains(IMAGES_RESOURCES)) {
+        
+        String type = httpRequest.getParameter("type");
+        if ("logout".equals(type)) {
             chain.doFilter(request, response);
             return;
         }
-
+        
+        String contextPath = httpRequest.getContextPath();
+        String requestURI = httpRequest.getRequestURI();
+        String relativePath = requestURI.substring(contextPath.length());
+        
         HttpSession session = httpRequest.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            httpResponse.sendRedirect(contextPath + LOGIN_PAGE);
-        } else {
-            chain.doFilter(request, response);
+        
+        if (session != null && session.getAttribute("user") != null) {
+            if (relativePath.equals(LOGIN_PAGE) || relativePath.equals(LOGIN_SERVLET)) {
+                httpResponse.sendRedirect(contextPath + DASHBOARD_PAGE);
+                return;
+            }
         }
+        
+        if (session == null || session.getAttribute("user") == null) {
+            if (relativePath.equals(LOGIN_PAGE) || relativePath.equals(LOGIN_SERVLET)) {
+                chain.doFilter(request, response);
+                return;
+            }
+            if (!(relativePath.contains(STATIC_RESOURCES) || 
+                  relativePath.contains(JS_RESOURCES) || 
+                  relativePath.contains(UTILS_RESOURCES) || 
+                  relativePath.contains(IMAGES_RESOURCES))) {
+                httpResponse.sendRedirect(contextPath + LOGIN_PAGE);
+                return;
+            }
+        }
+        
+        chain.doFilter(request, response);
     }
 
     @Override
