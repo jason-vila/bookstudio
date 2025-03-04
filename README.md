@@ -9,9 +9,14 @@
   <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/dashboard-view.png" width="800" alt="Dashboard Preview" />
 </p>
 
-### 📚 Loans Interface
+### 📚 Editing a Book
 <p align="center">
-  <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/loan-view.png" width="800" alt="Dashboard Preview" />
+  <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/book-view.png" width="800" alt="Book Editing Preview" />
+</p>
+
+### ⚖️ Loans Interface
+<p align="center">
+  <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/loans-view.png" width="800" alt="Loans Preview" />
 </p>
 
 ### 🔑 Login Interface
@@ -19,7 +24,7 @@
   <img src="https://github.com/jason-vila/bookstudio/blob/main/src/main/webapp/images/login-view.png" width="800" alt="Login Preview" />
 </p>
 
-## 📜 Description
+## 📃 Description
 
 BookStudio is a comprehensive web-based library management system designed for managing book loans at a fictional university library. The primary focus is on streamlining the lending process with clear status tracking (loaned/returned).
 
