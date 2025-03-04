@@ -159,11 +159,30 @@ function loadPublishers() {
                 initializeTooltips(tableBody);
             }
             
-            if ($.fn.DataTable.isDataTable('#publisherTable')) {
+			if ($.fn.DataTable.isDataTable('#publisherTable')) {
                 $('#publisherTable').DataTable().destroy();
             }
             
-            setupDataTable('#publisherTable');
+			let dataTable = setupDataTable('#publisherTable');
+
+			if (data && data.length > 0) {
+                $("#generatePDF").prop("disabled", false);
+            } else {
+                $("#generatePDF").prop("disabled", true);
+            }
+
+            dataTable.on('draw', function () {
+                const noDataMessage = $("#publisherTable").find("td.dataTables_empty").length > 0;
+                if (noDataMessage) {
+                    $("#generatePDF").prop("disabled", true);
+                } else {
+                    $("#generatePDF").prop("disabled", false);
+                }
+            });
+
+			$("#generatePDF").off("click").on("click", function () {
+		        generatePDF(dataTable);
+		    });
         },
         error: function(status, error) {
             clearTimeout(safetyTimer);
@@ -799,6 +818,77 @@ function initializeTooltips(container) {
     }).on('click', function() {
         $(this).tooltip('hide');
     });
+}
+
+function generatePDF(publisherTable) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF("p", "mm", "a4");
+    const logoUrl = '/bookstudio/images/bookstudio-logo-no-bg.png';
+
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const margin = 15;
+    const topMargin = 5;
+
+    doc.addImage(logoUrl, 'PNG', margin, topMargin, 30, 30);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.setTextColor(40);
+    doc.text("Lista de Editoriales", pageWidth / 2, topMargin + 18, { align: "center" });
+
+    const fecha = new Date().toLocaleDateString();
+    const hora = new Date().toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.text(`Fecha: ${fecha}`, pageWidth - margin, topMargin + 15, { align: "right" });
+    doc.text(`Hora: ${hora}`, pageWidth - margin, topMargin + 20, { align: "right" });
+
+    const data = publisherTable.rows({ search: 'applied' }).nodes().toArray().map(row => {
+        let estado = row.cells[4].innerText.trim();
+        estado = estado.includes("Activo") ? "Activo" : "Inactivo";
+
+        return [
+            row.cells[0].innerText.trim(),
+            row.cells[1].innerText.trim(),
+            row.cells[2].innerText.trim(),
+            row.cells[3].innerText.trim(),
+            estado
+        ];
+    });
+
+    doc.autoTable({
+        startY: topMargin + 35,
+        margin: { left: margin, right: margin },
+        head: [['ID', 'Nombre', 'Nacionalidad', 'Género Literario', 'Estado']],
+        body: data,
+        theme: 'grid',
+        headStyles: {
+            fillColor: [0, 0, 0],
+            textColor: 255,
+            fontStyle: 'bold',
+            halign: 'left'
+        },
+        bodyStyles: {
+            font: "helvetica",
+            fontSize: 10,
+            halign: 'left'
+        },
+        columnStyles: {
+            0: { cellWidth: 20 },
+            1: { cellWidth: 50 },
+            2: { cellWidth: 30 },
+            3: { cellWidth: 50 },
+            4: { cellWidth: 30 }
+        },
+        didParseCell: function (data) {
+            if (data.section === 'body' && data.column.index === 4) {
+                data.cell.styles.textColor = data.cell.raw === "Activo" ? [0, 128, 0] : [255, 0, 0];
+            }
+        }
+    });
+
+    doc.output("dataurlnewwindow");
 }
 
 /*****************************************

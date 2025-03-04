@@ -12,7 +12,7 @@ function toggleButtonAndSpinner(action) {
 }
 
 function setupDataTable(tableId) {
-    $(tableId).DataTable({
+    let table = $(tableId).DataTable({
         responsive: true,
         searching: true,
         lengthChange: true,
@@ -43,4 +43,6 @@ function setupDataTable(tableId) {
             $('#tableContainer').removeClass('d-none');
         }
     }, 3000);
+	
+	return table;
 }

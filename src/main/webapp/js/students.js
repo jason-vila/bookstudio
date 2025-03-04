@@ -179,11 +179,30 @@ function loadStudents() {
                 initializeTooltips(tableBody);
             }
 			
-			if ($.fn.DataTable.isDataTable('#studentTable')) {
+			if ($.fn.DataTable.isDataTable('#bookTable')) {
                 $('#studentTable').DataTable().destroy();
             }
-			
-			setupDataTable('#studentTable');
+            
+			let dataTable = setupDataTable('#studentTable');
+
+			if (data && data.length > 0) {
+                $("#generatePDF").prop("disabled", false);
+            } else {
+                $("#generatePDF").prop("disabled", true);
+            }
+
+            dataTable.on('draw', function () {
+                const noDataMessage = $("#studentTable").find("td.dataTables_empty").length > 0;
+                if (noDataMessage) {
+                    $("#generatePDF").prop("disabled", true);
+                } else {
+                    $("#generatePDF").prop("disabled", false);
+                }
+            });
+
+			$("#generatePDF").off("click").on("click", function () {
+		        generatePDF(dataTable);
+		    });
         },
         error: function (status, error) {
 			clearTimeout(safetyTimer);
@@ -789,6 +808,72 @@ function initializeTooltips(container) {
     }).on('click', function() {
         $(this).tooltip('hide');
     });
+}
+
+function generatePDF(dataTable) {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF("l", "mm", "a4");
+
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const margin = 10;
+    const topMargin = 5;
+
+    doc.addImage('/bookstudio/images/bookstudio-logo-no-bg.png', 'PNG', margin, topMargin - 5, 30, 30);
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.text("Lista de Estudiantes", pageWidth / 2, topMargin + 13, { align: "center" });
+
+    const fecha = new Date().toLocaleDateString();
+    const hora = new Date().toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(8);
+    doc.text(`Fecha: ${fecha}`, pageWidth - margin, topMargin + 10, { align: "right" });
+    doc.text(`Hora: ${hora}`, pageWidth - margin, topMargin + 15, { align: "right" });
+
+    const data = dataTable.rows({ search: 'applied' }).nodes().toArray().map(row => {
+        let estado = row.cells[6].innerText.trim();
+        estado = estado.includes("Activo") ? "Activo" : "Inactivo";
+
+        return [
+            row.cells[0].innerText.trim(),
+            row.cells[1].innerText.trim(),
+            row.cells[2].innerText.trim(),
+            row.cells[3].innerText.trim(),
+            row.cells[4].innerText.trim(),
+            row.cells[5].innerText.trim(),
+            estado
+        ];
+    });
+
+    doc.autoTable({
+        startY: topMargin + 25,
+        margin: { left: margin, right: margin },
+        head: [['ID', 'DNI', 'Nombres', 'Apellidos', 'Teléfono', 'Correo electrónico', 'Estado']],
+        body: data,
+        theme: 'grid',
+        headStyles: {
+            fillColor: [0, 0, 0],
+            textColor: 255,
+            fontStyle: 'bold',
+            fontSize: 8,
+            halign: 'left'
+        },
+        bodyStyles: {
+            font: "helvetica",
+            fontSize: 7,
+            halign: 'left'
+        },
+        didParseCell: function (data) {
+            if (data.section === 'body' && data.column.index === 6) {
+                data.cell.styles.textColor = data.cell.raw === "Activo"
+                    ? [0, 128, 0]
+                    : [255, 0, 0];
+            }
+        }
+    });
+
+    doc.output("dataurlnewwindow");
 }
 
 /*****************************************

@@ -34,7 +34,7 @@
 	            </button>
 			    
 			    <!-- PDF Button -->
-			    <button class="btn btn-custom-secondary d-flex align-items-center me-2" aria-label="Generar PDF" disabled>
+			    <button class="btn btn-custom-secondary d-flex align-items-center me-2" id="generatePDF" aria-label="Generar PDF" disabled>
 	                <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
 	                PDF
 	            </button>
