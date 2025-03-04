@@ -1,13 +1,13 @@
 function toggleButtonAndSpinner(action) {
-    const button = $('#btnAdd');
+    const buttons = $('#buttonGroupHeader button');
     const spinner = $('#spinnerLoad');
 
     if (action === 'loading') {
         spinner.removeClass('d-none');
-        button.prop('disabled', true);
+        buttons.prop('disabled', true);
     } else if (action === 'loaded') {
         spinner.addClass('d-none');
-        button.prop('disabled', false);
+        buttons.prop('disabled', false);
     }
 }
 

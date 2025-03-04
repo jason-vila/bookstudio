@@ -218,19 +218,8 @@ body[data-bs-theme="dark"] .bootstrap-select .dropdown-toggle:hover {
         position: relative;
     }
 
-    .card-header button {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-
-@media (max-width: 768px) {
-    .card-header button {
-        position: relative;
-        transform: none;
+    .card-header .excel {
         margin-left: auto;
-        margin-right: 0;
     }
 }
 
@@ -246,6 +235,28 @@ body[data-bs-theme="dark"] .bootstrap-select .dropdown-toggle:hover {
     .bd-placeholder-img-lg {
         font-size: 3.5rem;
     }
+    
+    .card-header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .card-header h5 {
+        flex-basis: 100%;
+    }
+
+    .card-header button {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-left: 0;
+    }
+    
+    .modal-dialog {
+        display: flex;
+        align-items: center;
+        min-height: calc(100% - var(--bs-modal-margin) * 2);
+    }
 }
 
 @media (min-width: 929px) {
@@ -257,14 +268,6 @@ body[data-bs-theme="dark"] .bootstrap-select .dropdown-toggle:hover {
 @media (max-width: 928px) {
     .table-responsive {
         overflow-x: auto;
-    }
-}
-
-@media (max-width: 768px) {
-    .modal-dialog {
-        display: flex;
-        align-items: center;
-        min-height: calc(100% - var(--bs-modal-margin) * 2);
     }
 }
 

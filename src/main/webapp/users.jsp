@@ -24,11 +24,23 @@
 		<!-- Card Container -->
 	    <section id="cardContainer" class="card border">
 	    	<!-- Card Header -->
-	        <header class="card-header d-flex align-items-center position-relative"> 
+	        <header class="card-header d-flex align-items-center position-relative" id="buttonGroupHeader"> 
 			    <h5 class="card-title text-body-emphasis mb-2 mt-2">Tabla Usuarios</h5>
 			    
+			    <!-- Excel Button -->
+			    <button class="btn btn-custom-secondary excel d-flex align-items-center me-2" aria-label="Generar Excel" disabled>
+	                <i class="bi bi-file-earmark-excel text-success me-2"></i>
+	                Excel
+	            </button>
+			    
+			    <!-- PDF Button -->
+			    <button class="btn btn-custom-secondary d-flex align-items-center me-2" aria-label="Generar PDF" disabled>
+	                <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
+	                PDF
+	            </button>
+			    
 			    <!-- Add Button -->
-			    <button class="btn btn-custom-primary d-flex align-items-center" id="btnAdd"
+			    <button class="btn btn-custom-primary d-flex align-items-center"
 			    	data-bs-toggle="modal" data-bs-target="#addUserModal" aria-label="Agregar usuario" disabled>
 			        <i class="bi bi-plus-lg me-2"></i>
 			        Agregar
