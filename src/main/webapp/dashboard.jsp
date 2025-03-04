@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="css/styles-index.css">
     <title>BookStudio</title>
-    <link href="images/dark-icon.png" rel="icon" media="(prefers-color-scheme: light)">
-    <link href="images/light-icon.png" rel="icon" media="(prefers-color-scheme: dark)">
+    <link href="images/logo-dark.png" rel="icon" media="(prefers-color-scheme: light)">
+    <link href="images/logo-light.png" rel="icon" media="(prefers-color-scheme: dark)">
 </head>
 <body>
     <!-- ===================== Header ===================== -->

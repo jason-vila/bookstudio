@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <jsp:include page="WEB-INF/includes/styles.jsp"></jsp:include>
     <title>BookStudio</title>
-    <link href="images/dark-icon.png" rel="icon" media="(prefers-color-scheme: light)">
-    <link href="images/light-icon.png" rel="icon" media="(prefers-color-scheme: dark)">
+    <link href="images/logo-dark.png" rel="icon" media="(prefers-color-scheme: light)">
+    <link href="images/logo-light.png" rel="icon" media="(prefers-color-scheme: dark)">
 </head>
 <body>
 	<!-- ===================== Header ===================== -->

@@ -15,7 +15,7 @@
 
         <!-- Logo -->
 		<a href="/bookstudio/dashboard.jsp" class="text-center text-decoration-none text-body-emphasis ms-md-2 d-flex align-items-center">
-		    <img class="logo me-2" alt="Logo" src="images/logo.png">
+		    <img class="logo me-2" alt="Logo" src="images/logo-light.png">
 		    <span class="fs-5 text-logo">BookStudio</span>
 		</a>
 
