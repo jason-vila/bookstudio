@@ -195,7 +195,7 @@ $(document).ready(function () {
 
         var currentPassword = $('#currentProfilePassword').val().trim();
         var newPassword = $('#editProfilePassword').val().trim();
-        var formData = new FormData(this);
+        var data = $(this).serialize();
 		
 		if (currentPassword && !newPassword) {
 	        $("#editProfilePassword").addClass("is-invalid");
@@ -226,8 +226,8 @@ $(document).ready(function () {
                     if (response.success) {
                         $("#currentProfilePassword").removeClass("is-invalid");
                         $("#currentProfilePassword").siblings('.invalid-feedback').text('');
-                        formData.set('editProfilePassword', newPassword);
-                        submitProfileForm(formData);
+                        data += '&editProfilePassword=' + encodeURIComponent(newPassword);
+                        submitProfileForm(data);
                     } else {
                         $("#currentProfilePassword").addClass("is-invalid");
                         $("#currentProfilePassword").siblings('.invalid-feedback')
@@ -241,29 +241,27 @@ $(document).ready(function () {
                 }
             });
         } else {
-            formData.set('editProfilePassword', "");
-            submitProfileForm(formData);
+			data += '&editProfilePassword=';
+			submitProfileForm(data);
         }
     });
 
 	let formSubmitted = false;
 
 	// Submit profile form
-	function submitProfileForm(formData) {
+	function submitProfileForm(data) {
 	    if (formSubmitted) return;
 	    formSubmitted = true;
 
 	    $('#updateProfileSpinner').removeClass('d-none');
 	    $('#updateProfileBtn').prop('disabled', true);
 
-	    formData.append("type", "updateProfile");
+	    data += '&type=updateProfile';
 
 	    $.ajax({
 	        url: '/bookstudio/ProfileServlet',
 	        method: 'POST',
-	        data: formData,
-	        processData: false,
-	        contentType: false,
+	        data: data,
 	        success: function (response) {
 	            if (response.success) {
 	                sessionStorage.setItem('toastMessage', 'Perfil actualizado exitosamente.');

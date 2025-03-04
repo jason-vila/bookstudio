@@ -324,7 +324,7 @@ function handleAddLoanForm() {
         });
 		
         if (isValid) {
-			var formData = $('#addLoanForm').serialize() + '&type=create';
+			var data = $('#addLoanForm').serialize() + '&type=create';
 
 			var submitButton = $(this).find('[type="submit"]');
 			submitButton.prop('disabled', true);
@@ -334,7 +334,7 @@ function handleAddLoanForm() {
             $.ajax({
                 url: '/bookstudio/LoanServlet',
                 type: 'POST',
-                data: formData,
+                data: data,
                 dataType: 'json',
                 success: function (response) {
                     if (response && response.loanId) {
@@ -475,16 +475,16 @@ function handleEditLoanForm() {
         });
 
         if (isValid) {
-            var formData = $(this).serialize() + '&type=update';
+            var data = $(this).serialize() + '&type=update';
 			
 			var loanId = $(this).data('loanId');
 			if (loanId) {
-			    formData += '&loanId=' + encodeURIComponent(loanId);
+			    data += '&loanId=' + encodeURIComponent(loanId);
 			}
 			
 			var bookId = $(this).data('bookId');
 			if (bookId) {
-			    formData += '&bookId=' + encodeURIComponent(bookId);
+			    data += '&bookId=' + encodeURIComponent(bookId);
 			}
 
 			var submitButton = $(this).find('[type="submit"]');
@@ -495,7 +495,7 @@ function handleEditLoanForm() {
             $.ajax({
                 url: '/bookstudio/LoanServlet',
                 type: 'POST',
-                data: formData,
+                data: data,
                 dataType: 'json',
                 success: function(response) {
                     if (response.success) {

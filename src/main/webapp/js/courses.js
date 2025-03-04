@@ -217,7 +217,7 @@ function handleAddCourseForm() {
         });
 		
 		if (isValid) {
-			var formData = $(this).serialize() + '&type=create';
+			var data = $(this).serialize() + '&type=create';
 			
 			var submitButton = $(this).find('[type="submit"]');
 			submitButton.prop('disabled', true);
@@ -227,7 +227,7 @@ function handleAddCourseForm() {
 	        $.ajax({
 	            url: '/bookstudio/CourseServlet',
 	            type: 'POST',
-	            data: formData,
+	            data: data,
 	            dataType: 'json',
 	            success: function (response) {
 	                if (response && response.courseId) {
@@ -338,11 +338,11 @@ function handleEditCourseForm() {
         });
 		
 		if (isValid) {
-			var formData = $(this).serialize() + '&type=update';
+			var data = $(this).serialize() + '&type=update';
 			
 			var courseId = $(this).data('courseId');
 			if (courseId) {
-			    formData += '&courseId=' + encodeURIComponent(courseId);
+			    data += '&courseId=' + encodeURIComponent(courseId);
 			}
 					
 			var submitButton = $(this).find('[type="submit"]');
@@ -353,7 +353,7 @@ function handleEditCourseForm() {
 	        $.ajax({
 	            url: '/bookstudio/CourseServlet',
 	            type: 'POST',
-	            data: formData,
+	            data: data,
 	            dataType: 'json',
 	            success: function(response) {
 	                if (response.success) {

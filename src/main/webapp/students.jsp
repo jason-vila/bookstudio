@@ -97,7 +97,7 @@
 	            
 	            <!-- Modal Body -->
 	            <div class="modal-body">
-	                <form id="addStudentForm" novalidate>
+	                <form id="addStudentForm" accept-charset="UTF-8" novalidate>
 	                    <!-- Personal Information Section -->
 	                    <div class="row">
 	                        <!-- DNI Field -->
@@ -392,7 +392,7 @@
 	            
 	            <!-- Modal Body -->
 	            <div class="modal-body">
-	                <form id="editStudentForm" novalidate>
+	                <form id="editStudentForm" accept-charset="UTF-8" novalidate>
 	                    <!-- Personal Information Section -->
 	                    <div class="row">
 	                        <!-- DNI Field -->

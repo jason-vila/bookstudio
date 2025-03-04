@@ -1,9 +1,12 @@
 package com.bookstudio.services;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.Base64;
 import java.util.List;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
@@ -40,12 +43,12 @@ public class UserService {
     }
     
     public User createUser(HttpServletRequest request) throws Exception {
-        String username = request.getParameter("addUserUsername");
-        String email = request.getParameter("addUserEmail");
-        String firstName = request.getParameter("addUserFirstName");
-        String lastName = request.getParameter("addUserLastName");
-        String password = request.getParameter("addUserPassword");
-        String role = request.getParameter("addUserRole");
+    	String username = getUtf8Parameter(request, "addUserUsername");
+        String email = getUtf8Parameter(request, "addUserEmail");
+        String firstName = getUtf8Parameter(request, "addUserFirstName");
+        String lastName = getUtf8Parameter(request, "addUserLastName");
+        String password = getUtf8Parameter(request, "addUserPassword");
+        String role = getUtf8Parameter(request, "addUserRole");
         
         Part photoPart = request.getPart("addUserProfilePhoto");
         byte[] profilePhoto = null;
@@ -75,11 +78,11 @@ public class UserService {
     }
     
     public User updateUser(HttpServletRequest request) throws Exception {
-        String userId = request.getParameter("userId");
-        String firstName = request.getParameter("editUserFirstName");
-        String lastName = request.getParameter("editUserLastName");
-        String password = request.getParameter("editUserPassword");
-        String role = request.getParameter("editUserRole");
+    	String userId = request.getParameter("userId");
+        String firstName = getUtf8Parameter(request, "editUserFirstName");
+        String lastName = getUtf8Parameter(request, "editUserLastName");
+        String password = getUtf8Parameter(request, "editUserPassword");
+        String role = getUtf8Parameter(request, "editUserRole");
         
         Part photoPart = request.getPart("editUserProfilePhoto");
         byte[] profilePhoto = null;
@@ -124,5 +127,15 @@ public class UserService {
                     "data:image/jpeg;base64," + Base64.getEncoder().encodeToString(profilePhoto));
             }
         }
+    }
+    
+    private String getUtf8Parameter(HttpServletRequest request, String fieldName) throws IOException, ServletException {
+        Part part = request.getPart(fieldName);
+        if (part != null) {
+            try (InputStream is = part.getInputStream()) {
+                return new String(is.readAllBytes(), "UTF-8");
+            }
+        }
+        return "";
     }
 }

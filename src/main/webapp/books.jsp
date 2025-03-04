@@ -98,7 +98,7 @@
 	            
 	            <!-- Modal Body -->
 	            <div class="modal-body">
-	                <form id="addBookForm" novalidate>
+	                <form id="addBookForm" accept-charset="UTF-8" novalidate>
 	                    <!-- Book Title and Total Copies Section -->
 	                    <div class="row">
 	                        <!-- Book Title Field -->
@@ -354,7 +354,7 @@
 	            
 	            <!-- Modal Body -->
 	            <div class="modal-body">
-	                <form id="editBookForm" novalidate>
+	                <form id="editBookForm" accept-charset="UTF-8" novalidate>
 	                    <!-- Title and Total Copies Section -->
 	                    <div class="row">
 	                        <!-- Book Title Field -->

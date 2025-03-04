@@ -52,8 +52,7 @@
 			        </svg>
 			
 			        <!-- Form for Editing Profile Image -->
-			        <form id="editProfilePhotoForm" enctype="multipart/form-data">
-			        
+			        <form id="editProfilePhotoForm" enctype="multipart/form-data">     
 			            <!-- Pencil Icon for Edit -->
 			            <label id="photoLabel" for="editProfilePhoto" 
 			                   class="position-absolute rounded-circle d-flex align-items-center justify-content-center pencil-icon"
@@ -89,7 +88,7 @@
 	        <!-- Profile Form -->
 	        <article class="d-flex justify-content-center">
 	            <div class="col-12 col-md-10 col-lg-8">
-	                <form id="editProfileForm" enctype="multipart/form-data">
+	                <form id="editProfileForm" accept-charset="UTF-8">
 	                    <!-- Form Fields -->
 	                    <fieldset class="row">
 	                        <!-- User and Email Section -->
@@ -178,22 +177,12 @@
 	                            </div>
 	                        </div>
 	                    </fieldset>
-	
-	                    <!-- Update Button -->
+	                    
 	                    <div class="row justify-content-center">
 	                        <div class="col-12 col-md-4">
-	                            <button 
-	                                type="submit" 
-	                                class="btn btn-custom-primary w-100 fs-6" 
-	                                id="updateProfileBtn" 
-	                                disabled
-	                            >
-	                                <span 
-	                                    class="spinner-border spinner-border-sm me-1 d-none" 
-	                                    role="status" 
-	                                    aria-hidden="true" 
-	                                    id="updateProfileSpinner"
-	                                ></span>
+	                        	<!-- Update Button -->
+	                            <button type="submit" class="btn btn-custom-primary w-100 fs-6" id="updateProfileBtn" disabled>
+	                                <span class="spinner-border spinner-border-sm me-1 d-none" role="status" aria-hidden="true" id="updateProfileSpinner"></span>
 	                                Actualizar Perfil
 	                            </button>
 	                        </div>

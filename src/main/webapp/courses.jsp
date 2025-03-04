@@ -96,7 +96,7 @@
 		        
 		        <!-- Modal Body -->
 		        <div class="modal-body">
-		            <form id="addCourseForm" novalidate>
+		            <form id="addCourseForm" accept-charset="UTF-8" novalidate>
 		                <div class="row">
 		                    <!-- Course Name Field -->
 		                    <div class="col-md-6 mb-3">
@@ -243,7 +243,7 @@
 	            
 	            <!-- Modal Body -->
 	            <div class="modal-body">
-	                <form id="editCourseForm" novalidate>
+	                <form id="editCourseForm" accept-charset="UTF-8" novalidate>
 	                    <!-- Course Name and Level Section -->
 	                    <div class="row">
 	                        <!-- Course Name Field -->

@@ -98,7 +98,7 @@
 	            
 	            <!-- Modal Body -->
 	            <div class="modal-body">
-	                <form id="addLoanForm" novalidate>
+	                <form id="addLoanForm" accept-charset="UTF-8" novalidate>
 	                    <!-- Book and Student Section -->
 	                    <div class="row">
 	                        <!-- Book Field -->
@@ -325,7 +325,7 @@
 	            
 	            <!-- Modal Body -->
 	            <div class="modal-body">
-	                <form id="editLoanForm" novalidate>
+	                <form id="editLoanForm" accept-charset="UTF-8" novalidate>
 	                    <!-- Student and Loan Date Section -->
 	                    <div class="row">
 	                        <!-- Student Field -->

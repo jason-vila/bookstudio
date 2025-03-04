@@ -1,10 +1,14 @@
 package com.bookstudio.services;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.Base64;
 import java.util.List;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 import com.bookstudio.dao.AuthorDao;
 import com.bookstudio.dao.LiteraryGenreDao;
@@ -42,12 +46,12 @@ public class AuthorService {
     }
     
     public Author createAuthor(HttpServletRequest request) throws Exception {
-        String name = request.getParameter("addAuthorName");
-        String nationality = request.getParameter("addAuthorNationality");
-        String literaryGenreId = request.getParameter("addLiteraryGenre");
+    	String name = getUtf8Parameter(request, "addAuthorName");
+        String nationality = getUtf8Parameter(request, "addAuthorNationality");
+        String literaryGenreId = getUtf8Parameter(request, "addLiteraryGenre");
         LocalDate birthDate = LocalDate.parse(request.getParameter("addAuthorBirthDate"));
-        String biography = request.getParameter("addAuthorBiography");
-        String status = request.getParameter("addAuthorStatus");
+        String biography = getUtf8Parameter(request, "addAuthorBiography");
+        String status = getUtf8Parameter(request, "addAuthorStatus");
         
         byte[] photo = null;
         try {
@@ -76,13 +80,13 @@ public class AuthorService {
     }
     
     public Author updateAuthor(HttpServletRequest request) throws Exception {
-        String authorId = request.getParameter("authorId");
-        String name = request.getParameter("editAuthorName");
-        String nationality = request.getParameter("editAuthorNationality");
-        String literaryGenreId = request.getParameter("editLiteraryGenre");
+    	String authorId = request.getParameter("authorId");
+        String name = getUtf8Parameter(request, "editAuthorName");
+        String nationality = getUtf8Parameter(request, "editAuthorNationality");
+        String literaryGenreId = getUtf8Parameter(request, "editLiteraryGenre");
         LocalDate birthDate = LocalDate.parse(request.getParameter("editAuthorBirthDate"));
-        String biography = request.getParameter("editAuthorBiography");
-        String status = request.getParameter("editAuthorStatus");
+        String biography = getUtf8Parameter(request, "editAuthorBiography");
+        String status = getUtf8Parameter(request, "editAuthorStatus");
         
         byte[] photo = null;
         try {
@@ -117,5 +121,15 @@ public class AuthorService {
         selectOptions.setLiteraryGenres(literaryGenres);
         
         return selectOptions;
+    }
+    
+    private String getUtf8Parameter(HttpServletRequest request, String fieldName) throws IOException, ServletException {
+        Part part = request.getPart(fieldName);
+        if (part != null) {
+            try (InputStream is = part.getInputStream()) {
+                return new String(is.readAllBytes(), "UTF-8");
+            }
+        }
+        return "";
     }
 }

@@ -297,7 +297,7 @@ function handleAddBookForm() {
         });
 		
 		if (isValid) {
-			var formData = $('#addBookForm').serialize() + '&type=create';
+			var data = $('#addBookForm').serialize() + '&type=create';
 			
 			var submitButton = $(this).find('[type="submit"]');
 			submitButton.prop('disabled', true);
@@ -307,7 +307,7 @@ function handleAddBookForm() {
 			$.ajax({
 	            url: '/bookstudio/BookServlet',
 	            type: 'POST',
-	            data: formData,
+	            data: data,
 	            dataType: 'json',
 	            success: function (response) {
 	                if (response && response.bookId) {
@@ -440,11 +440,11 @@ function handleEditBookForm() {
         });
 		
 		if (isValid) {
-			var formData = $(this).serialize() + '&type=update';
+			var data = $(this).serialize() + '&type=update';
 			
 			var bookId = $(this).data('bookId');
 			if (bookId) {
-			    formData += '&bookId=' + encodeURIComponent(bookId);
+			    data += '&bookId=' + encodeURIComponent(bookId);
 			}
 			
 			var submitButton = $(this).find('[type="submit"]');
@@ -455,7 +455,7 @@ function handleEditBookForm() {
 	        $.ajax({
 	            url: '/bookstudio/BookServlet',
 	            type: 'POST',
-	            data: formData,
+	            data: data,
 	            dataType: 'json',
 	            success: function(response) {
 	                if (response.success) {

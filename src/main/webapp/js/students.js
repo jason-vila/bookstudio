@@ -286,7 +286,7 @@ function handleAddStudentForm() {
         });
 
 		if (isValid) {
-			var formData = $(this).serialize() + '&type=create';
+			var data = $(this).serialize() + '&type=create';
 			
 			var submitButton = $(this).find('[type="submit"]');
 			submitButton.prop('disabled', true);
@@ -296,7 +296,7 @@ function handleAddStudentForm() {
 	        $.ajax({
 	            url: '/bookstudio/StudentServlet',
 	            type: 'POST',
-	            data: formData,
+	            data: data,
 	            dataType: 'json',
 	            success: function (response) {
 	                if (response && response.success) {
@@ -492,11 +492,11 @@ function handleEditStudentForm() {
         });
 		
 		if (isValid) {
-			var formData = $(this).serialize() + '&type=update';
+			var data = $(this).serialize() + '&type=update';
 			
 			var studentId = $(this).data('studentId');
 			if (studentId) {
-			    formData += '&studentId=' + encodeURIComponent(studentId);
+			    data += '&studentId=' + encodeURIComponent(studentId);
 			}
 			
 			var submitButton = $(this).find('[type="submit"]');
@@ -507,7 +507,7 @@ function handleEditStudentForm() {
 			$.ajax({
 	            url: '/bookstudio/StudentServlet',
 	            type: 'POST',
-	            data: formData,
+	            data: data,
 	            dataType: 'json',
 	            success: function(response) {
 	                if (response && response.success) {

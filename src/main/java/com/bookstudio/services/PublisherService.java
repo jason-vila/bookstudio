@@ -1,9 +1,13 @@
 package com.bookstudio.services;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
 import java.util.List;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 import com.bookstudio.dao.LiteraryGenreDao;
 import com.bookstudio.dao.PublisherDao;
@@ -41,13 +45,13 @@ public class PublisherService {
     }
     
     public Publisher createPublisher(HttpServletRequest request) throws Exception {
-        String name = request.getParameter("addPublisherName");
-        String nationality = request.getParameter("addPublisherNationality");
-        String literaryGenreId = request.getParameter("addLiteraryGenre");        
-        int foundationYear = Integer.parseInt(request.getParameter("addFoundationYear"));
-        String website = request.getParameter("addPublisherWebsite");
-        String address = request.getParameter("addPublisherAddress");
-        String status = request.getParameter("addPublisherStatus");
+    	String name = getUtf8Parameter(request, "addPublisherName");
+        String nationality = getUtf8Parameter(request, "addPublisherNationality");
+        String literaryGenreId = getUtf8Parameter(request, "addLiteraryGenre");
+        int foundationYear = Integer.parseInt(getUtf8Parameter(request, "addFoundationYear"));
+        String website = getUtf8Parameter(request, "addPublisherWebsite");
+        String address = getUtf8Parameter(request, "addPublisherAddress");
+        String status = getUtf8Parameter(request, "addPublisherStatus");
         
         byte[] photo = null;
         try {
@@ -77,14 +81,14 @@ public class PublisherService {
     }
     
     public Publisher updatePublisher(HttpServletRequest request) throws Exception {
-    	String publisherId = request.getParameter("publisherId");    
-        String name = request.getParameter("editPublisherName");
-        String nationality = request.getParameter("editPublisherNationality");
-        String literaryGenreId = request.getParameter("editLiteraryGenre");        
-        int foundationYear = Integer.parseInt(request.getParameter("editFoundationYear"));
-        String website = request.getParameter("editPublisherWebsite");
-        String address = request.getParameter("editPublisherAddress");
-        String status = request.getParameter("editPublisherStatus");
+    	String publisherId = getUtf8Parameter(request, "publisherId");
+        String name = getUtf8Parameter(request, "editPublisherName");
+        String nationality = getUtf8Parameter(request, "editPublisherNationality");
+        String literaryGenreId = getUtf8Parameter(request, "editLiteraryGenre");
+        int foundationYear = Integer.parseInt(getUtf8Parameter(request, "editFoundationYear"));
+        String website = getUtf8Parameter(request, "editPublisherWebsite");
+        String address = getUtf8Parameter(request, "editPublisherAddress");
+        String status = getUtf8Parameter(request, "editPublisherStatus");
         
         byte[] photo = null;
         try {
@@ -120,5 +124,15 @@ public class PublisherService {
         selectOptions.setLiteraryGenres(literayGenres);
         
         return selectOptions;
+    }
+    
+    private String getUtf8Parameter(HttpServletRequest request, String fieldName) throws IOException, ServletException {
+        Part part = request.getPart(fieldName);
+        if (part != null) {
+            try (InputStream is = part.getInputStream()) {
+                return new String(is.readAllBytes(), "UTF-8");
+            }
+        }
+        return "";
     }
 }
