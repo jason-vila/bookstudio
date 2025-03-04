@@ -226,4 +226,4 @@ This is a personal project aimed at learning and growth, but contributions are w
 
 ## 📜 License
 
-This project is not licensed.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
