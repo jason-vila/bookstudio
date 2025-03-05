@@ -30,7 +30,7 @@
 	        <article class="col-md-4">
 	            <div class="card border-start-primary bg-body-secondary border mb-3">
 	                <div class="card-body">
-	                    <h5 class="card-title d-flex align-items-center">
+	                    <h5 class="card-title d-flex align-items-center text-body-emphasis">
 	                        <i class="bi pe-none me-2 bi-journal-bookmark text-primary"></i>
 	                        Libros
 	                    </h5>
@@ -43,7 +43,7 @@
 	        <article class="col-md-4">
 	            <div class="card border-start-success bg-body-secondary border mb-3">
 	                <div class="card-body">
-	                    <h5 class="card-title d-flex align-items-center">
+	                    <h5 class="card-title d-flex align-items-center text-body-emphasis">
 	                    	<i class="bi pe-none me-2 bi-person-plus text-success"></i>
 	                     	Autores
 	                 	</h5>
@@ -56,7 +56,7 @@
 	        <article class="col-md-4">
 	            <div class="card border-start-warning bg-body-secondary border mb-3">
 	                <div class="card-body sombra">
-	                    <h5 class="card-title d-flex align-items-center">
+	                    <h5 class="card-title d-flex align-items-center text-body-emphasis">
 							<i class="bi pe-none me-2 bi-map text-warning"></i>
 	                    	Editoriales
 	                    </h5>
@@ -72,7 +72,7 @@
 	        <article class="col-md-4">
 	            <div class="card border-start-info bg-body-secondary border mb-3">
 	                <div class="card-body sombra">
-	                    <h5 class="card-title d-flex align-items-center">
+	                    <h5 class="card-title d-flex align-items-center text-body-emphasis">
 							<i class="bi pe-none me-2 bi-stickies text-info"></i>
 							Cursos
 	                    </h5>
@@ -85,7 +85,7 @@
 	        <article class="col-md-4">
 	            <div class="card border-start-secondary bg-body-secondary border mb-3">
 	                <div class="card-body sombra">
-	                    <h5 class="card-title d-flex align-items-center">
+	                    <h5 class="card-title d-flex align-items-center text-body-emphasis">
 	                   		<i class="bi pe-none me-2 bi-mortarboard text-secondary"></i>
 	                   		Estudiantes
 	                    </h5>
@@ -98,7 +98,7 @@
 	        <article class="col-md-4">
 	            <div class="card border-start-danger bg-body-secondary border mb-3">
 	                <div class="card-body sombra">
-	                    <h5 class="card-title d-flex align-items-center">
+	                    <h5 class="card-title d-flex align-items-center text-body-emphasis">
 	                     	<i class="bi pe-none me-2 bi-file-earmark-text text-danger"></i>
 	                     	Préstamos
 	                    </h5>
@@ -113,7 +113,7 @@
 		    <article class="col-md-6">
 		        <div class="card mb-3 border">
 		            <div class="card-body">
-		                <h5 class="card-title d-flex align-items-center">
+		                <h5 class="card-title d-flex align-items-center text-body-emphasis">
 		                    <i class="bi pe-none me-2 bi-journal-plus"></i>
 		                    Libros Prestados por Mes
 		                </h5>
@@ -126,7 +126,7 @@
 		    <article class="col-md-6">
 		        <div class="card mb-3 border">
 		            <div class="card-body">
-		                <h5 class="card-title d-flex align-items-center">
+		                <h5 class="card-title d-flex align-items-center text-body-emphasis">
 		                    <i class="bi pe-none me-2 bi-arrow-clockwise"></i>
 		                    Libros Devueltos por Mes
 		                </h5>
@@ -139,7 +139,7 @@
 		    <article class="col-md-6">
 		        <div class="card border">
 		            <div class="card-body">
-		                <h5 class="card-title d-flex align-items-center">
+		                <h5 class="card-title d-flex align-items-center text-body-emphasis">
 		                    <i class="bi pe-none me-2 bi-clock"></i>
 		                    Tiempo Promedio de Préstamo
 		                </h5>
@@ -152,7 +152,7 @@
 		    <article class="col-md-6">
 		        <div class="card border">
 		            <div class="card-body">
-		                <h5 class="card-title d-flex align-items-center">
+		                <h5 class="card-title d-flex align-items-center text-body-emphasis">
 		                    <i class="bi pe-none me-2 bi-bar-chart-line"></i>
 		                    Comparación de Préstamos por Año
 		                </h5>
