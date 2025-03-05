@@ -181,10 +181,10 @@
 	                    <div class="row justify-content-center">
 	                        <div class="col-12 col-md-4">
 	                        	<!-- Update Button -->
-	                            <button type="submit" class="btn btn-custom-primary w-100 fs-6" id="updateProfileBtn" disabled>
-	                                <span class="spinner-border spinner-border-sm me-1 d-none" role="status" aria-hidden="true" id="updateProfileSpinner"></span>
-	                                Actualizar Perfil
-	                            </button>
+	                        	<button type="submit" class="btn btn-custom-primary w-100 fs-6" id="updateProfileBtn" disabled>
+				                    <span id="updateProfileSpinner" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+				                    <span id="updateProfileText">Actualizar Perfil</span>
+				                </button>
 	                        </div>
 	                    </div>
 	                </form>

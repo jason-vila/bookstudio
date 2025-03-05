@@ -253,8 +253,9 @@ $(document).ready(function () {
 	    if (formSubmitted) return;
 	    formSubmitted = true;
 
-	    $('#updateProfileSpinner').removeClass('d-none');
-	    $('#updateProfileBtn').prop('disabled', true);
+		$("#updateProfileBtn").prop("disabled", true);
+        $("#updateProfileSpinner").removeClass("d-none");
+		$("#updateProfileText").addClass("d-none");
 
 	    data += '&type=updateProfile';
 
@@ -277,8 +278,9 @@ $(document).ready(function () {
 	            formSubmitted = false;
 	        },
 	        complete: function () {
-	            $('#updateProfileSpinner').addClass('d-none');
-	            $('#updateProfileBtn').prop('disabled', false);
+				$("#updateProfileBtn").prop("disabled", false);
+                $("#updateProfileSpinner").addClass("d-none");
+				$("#updateProfileText").removeClass("d-none");
 	        }
 	    });
 	}
