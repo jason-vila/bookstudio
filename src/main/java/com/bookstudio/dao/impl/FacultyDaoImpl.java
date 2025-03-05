@@ -12,29 +12,29 @@ import com.bookstudio.models.Faculty;
 import com.bookstudio.utils.DbConnection;
 
 public class FacultyDaoImpl implements FacultyDao {
+	@Override
+	public List<Faculty> populateFacultySelect() {
+		List<Faculty> facultyList = new ArrayList<>();
 
-    @Override
-    public List<Faculty> populateFacultySelect() {
-        List<Faculty> facultyList = new ArrayList<>();
-        
-        String sql = """
-            SELECT FacultyID, FacultyName
-            FROM Faculties
-        """;
-        
-        try (Connection cn = DbConnection.getConexion();
-             PreparedStatement ps = cn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-             
-            while (rs.next()) {
-                Faculty faculty = new Faculty();
-                faculty.setFacultyId(rs.getString("FacultyID"));
-                faculty.setFacultyName(rs.getString("FacultyName"));
-                facultyList.add(faculty);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return facultyList;
-    }
+		String sql = """
+				    SELECT FacultyID, FacultyName
+				    FROM Faculties
+				""";
+
+		try (Connection cn = DbConnection.getConexion();
+				PreparedStatement ps = cn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery()) {
+
+			while (rs.next()) {
+				Faculty faculty = new Faculty();
+				faculty.setFacultyId(rs.getString("FacultyID"));
+				faculty.setFacultyName(rs.getString("FacultyName"));
+				facultyList.add(faculty);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return facultyList;
+	}
 }

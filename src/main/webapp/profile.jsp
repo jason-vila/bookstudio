@@ -3,28 +3,28 @@
 <!DOCTYPE html>
 <html lang="es" data-bs-theme="auto">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="utils/color-modes.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.css">
-    <link rel="stylesheet" href="css/styles-index.css">
-    <title>BookStudio</title>
-    <link href="images/logo-dark.png" rel="icon" media="(prefers-color-scheme: light)">
-    <link href="images/logo-light.png" rel="icon" media="(prefers-color-scheme: dark)">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="utils/color-modes.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropperjs/dist/cropper.min.css">
+	<link rel="stylesheet" href="css/styles-index.css">
+	<title>BookStudio</title>
+	<link href="images/logo-dark.png" rel="icon" media="(prefers-color-scheme: light)">
+	<link href="images/logo-light.png" rel="icon" media="(prefers-color-scheme: dark)">
 </head>
 <body>
 	<!-- ===================== Header ===================== -->
 	<jsp:include page="WEB-INF/includes/header.jsp"></jsp:include>
-	
+
 	<!-- ===================== Sidebar ==================== -->
 	<jsp:include page="WEB-INF/includes/sidebar.jsp">
-   		<jsp:param name="currentPage" value="" />
+		<jsp:param name="currentPage" value="" />
 	</jsp:include>
-            
-    <!-- ===================== Main Content ==================== -->
+
+	<!-- ===================== Main Content ==================== -->
 	<main class="d-flex flex-column overflow-auto bg-body">
 	    <section class="container mt-3">
 	    	<h2 class="text-center">Configuración de Perfil</h2>
@@ -256,22 +256,22 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Toast Container -->
 	<div class="toast-container" id="toast-container">
 		<!-- Toasts will be added here by JavaScript -->
 	</div>
 
-    <!-- External Libraries -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
+	<!-- External Libraries -->
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
 
 	<!-- Custom Scripts -->
-    <script src="utils/toast.js"></script>
-    <script src="utils/password.js"></script>
-    <script src="utils/header.js"></script>
-    <script src="js/profile.js"></script>
+	<script src="utils/toast.js"></script>
+	<script src="utils/password.js"></script>
+	<script src="utils/header.js"></script>
+	<script src="js/profile.js"></script>
 </body>
 </html>

@@ -4,12 +4,12 @@
 <html lang="es" data-bs-theme="auto">
 <head>
 	<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <jsp:include page="WEB-INF/includes/styles.jsp"></jsp:include>
-    <title>BookStudio</title>
-    <link href="images/logo-dark.png" rel="icon" media="(prefers-color-scheme: light)">
-    <link href="images/logo-light.png" rel="icon" media="(prefers-color-scheme: dark)">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<jsp:include page="WEB-INF/includes/styles.jsp"></jsp:include>
+	<title>BookStudio</title>
+	<link href="images/logo-dark.png" rel="icon" media="(prefers-color-scheme: light)">
+	<link href="images/logo-light.png" rel="icon" media="(prefers-color-scheme: dark)">
 </head>
 <body>
 	<!-- Set user role from session -->
@@ -17,74 +17,83 @@
 
 	<!-- ===================== Header ===================== -->
 	<jsp:include page="WEB-INF/includes/header.jsp"></jsp:include>
-	
+
 	<!-- ===================== Sidebar ==================== -->
 	<jsp:include page="WEB-INF/includes/sidebar.jsp">
-   		<jsp:param name="currentPage" value="students.jsp" />
+		<jsp:param name="currentPage" value="students.jsp" />
 	</jsp:include>
-		
+
 	<!-- ===================== Main Content ==================== -->
 	<main class="p-4 bg-body">
 		<!-- Card Container -->
-	    <section id="cardContainer" class="card border">
-	    	<!-- Card Header -->
-	        <header class="card-header d-flex align-items-center position-relative" id="buttonGroupHeader"> 
-			    <h5 class="card-title text-body-emphasis mb-2 mt-2">Tabla Estudiantes</h5>
-			    
-			    <!-- Excel Button -->
-			    <button class="btn btn-custom-secondary excel d-flex align-items-center me-2" aria-label="Generar Excel" disabled>
-	                <i class="bi bi-file-earmark-excel text-success me-2"></i>
-	                Excel
-	            </button>
-			    
-			    <!-- PDF Button -->
-			    <button class="btn btn-custom-secondary d-flex align-items-center me-2" id="generatePDF" aria-label="Generar PDF" disabled>
-	                <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
-	                PDF
-	            </button>
-			    
-			    <c:if test="${userRole == 'administrador'}">
-			    	<!-- Add Button -->
-	                <button class="btn btn-custom-primary d-flex align-items-center"
-				    	data-bs-toggle="modal" data-bs-target="#addStudentModal" aria-label="Agregar estudiante" disabled>
-				        <i class="bi bi-plus-lg me-2"></i>
-				        Agregar
-				    </button>
-	            </c:if>			    
-			</header>
-			<!-- Card Body -->      
-	        <div class="card-body">
-				<!-- Loading Spinner -->
-		        <div id="spinnerLoad" class="d-flex justify-content-center align-items-center h-100">
-			        <div class="spinner-border" role="status">
-			            <span class="visually-hidden">Cargando...</span>
-			        </div>
-		    	</div>
+		<section id="cardContainer" class="card border">
+			<!-- Card Header -->
+			<header
+				class="card-header d-flex align-items-center position-relative"
+				id="buttonGroupHeader">
+				<h5 class="card-title text-body-emphasis mb-2 mt-2">Tabla Estudiantes</h5>
 
-	            <!-- Table Container -->
-	            <section id="tableContainer" class="d-none small">
-	                <table id=studentTable class="table table-sm">
-	                    <thead>
-	                        <tr>
-	                        	<th scope="col" class="text-start">ID</th>
-	                            <th scope="col" class="text-start">DNI</th>
-	                            <th scope="col" class="text-start">Nombres</th>
-	                            <th scope="col" class="text-start">Apellidos</th>
-	                            <th scope="col" class="text-start">Teléfono</th>
-	                            <th scope="col" class="text-start">Correo electrónico</th>
-	                            <th scope="col" class="text-center">Estado</th>
-	                            <th scope="col" class="text-center"></th>
-	                        </tr>
-	                    </thead>
-	                    <tbody id="bodyStudents">
-	                        <!-- Data will be populated here via JavaScript -->
-	                    </tbody>
-	                </table>
-	            </section>
-	        </div>
-	    </section>
+				<!-- Excel Button -->
+				<button
+					class="btn btn-custom-secondary excel d-flex align-items-center me-2"
+					aria-label="Generar Excel" disabled>
+					<i class="bi bi-file-earmark-excel text-success me-2"></i>
+					Excel
+				</button>
+
+				<!-- PDF Button -->
+				<button
+					class="btn btn-custom-secondary d-flex align-items-center me-2"
+					id="generatePDF" aria-label="Generar PDF" disabled>
+					<i class="bi bi-file-earmark-pdf text-danger me-2"></i>
+					PDF
+				</button>
+
+				<c:if test="${userRole == 'administrador'}">
+					<!-- Add Button -->
+					<button class="btn btn-custom-primary d-flex align-items-center"
+						data-bs-toggle="modal" data-bs-target="#addStudentModal"
+						aria-label="Agregar estudiante" disabled>
+						<i class="bi bi-plus-lg me-2"></i>
+						Agregar
+					</button>
+				</c:if>
+			</header>
+			
+			<!-- Card Body -->
+			<div class="card-body">
+				<!-- Loading Spinner -->
+				<div id="spinnerLoad"
+					class="d-flex justify-content-center align-items-center h-100">
+					<div class="spinner-border" role="status">
+						<span class="visually-hidden">Cargando...</span>
+					</div>
+				</div>
+
+				<!-- Table Container -->
+				<section id="tableContainer" class="d-none small">
+					<table id=studentTable class="table table-sm">
+						<thead>
+							<tr>
+								<th scope="col" class="text-start">ID</th>
+								<th scope="col" class="text-start">DNI</th>
+								<th scope="col" class="text-start">Nombres</th>
+								<th scope="col" class="text-start">Apellidos</th>
+								<th scope="col" class="text-start">Teléfono</th>
+								<th scope="col" class="text-start">Correo electrónico</th>
+								<th scope="col" class="text-center">Estado</th>
+								<th scope="col" class="text-center"></th>
+							</tr>
+						</thead>
+						<tbody id="bodyStudents">
+							<!-- Data will be populated here via JavaScript -->
+						</tbody>
+					</table>
+				</section>
+			</div>
+		</section>
 	</main>
-	
+
 	<!-- Add Student Modal -->
 	<div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true" data-bs-backdrop="static">
 	    <div class="modal-dialog modal-lg">
@@ -558,12 +567,12 @@
 	        </div>
 	    </div>
 	</div>
-	
+
 	<!-- Toast Container -->
 	<div class="toast-container" id="toast-container">
 		<!-- Toasts will be added here by JavaScript -->
 	</div>
-	
+
 	<jsp:include page="WEB-INF/includes/scripts.jsp">
 		<jsp:param name="currentPage" value="students.js" />
 	</jsp:include>

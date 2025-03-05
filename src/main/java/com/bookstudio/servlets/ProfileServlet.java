@@ -104,5 +104,4 @@ public class ProfileServlet extends HttpServlet {
             response.getWriter().write("{\"success\": false, \"message\": \"La contraseña actual no es correcta.\"}");
         }
     }
-
 }

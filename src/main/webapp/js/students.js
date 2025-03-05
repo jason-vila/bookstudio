@@ -17,86 +17,86 @@
 var facultyList = [];
 
 function populateSelect(selector, dataList, valueKey, textKey) {
-    var select = $(selector).selectpicker('destroy').empty();
-    dataList.forEach(item => {
-        if (item[valueKey]) {
-            select.append(
-                $('<option>', {
-                    value: item[valueKey],
-                    text: item[textKey]
-                })
-            );
-        }
-    });
-}
-
-function populateSelectOptions() {
-    $.ajax({
-        url: '/bookstudio/StudentServlet',
-        type: 'GET',
-        data: { type: 'populateSelects' },
-        dataType: 'json',
-        success: function (data) {
-            if (data) {
-                facultyList = data.faculties;
-
-				populateSelect('#addStudentFaculty', facultyList, 'facultyId', 'facultyName');
-				
-                populateSelect('#editStudentFaculty', facultyList, 'facultyId', 'facultyName');
-            }
-        },
-        error: function (status, error) {
-            console.error("Error al obtener los datos para los select:", status, error);
-        }
-    });
-}
-
-function placeholderColorSelect() {	
-	$('select.selectpicker').on('change', function () {
-	    var $select = $(this);
-	    var $dropdown = $select.closest('.bootstrap-select');
-	    var $filterOption = $dropdown.find('.filter-option-inner-inner');
-
-		if ($select.val() !== "" && $select.val() !== null) {
-			$dropdown.removeClass('placeholder-color');
-	        $filterOption.css('color', 'var(--bs-body-color)');
-	    } 
+	var select = $(selector).selectpicker('destroy').empty();
+	dataList.forEach(item => {
+		if (item[valueKey]) {
+			select.append(
+				$('<option>', {
+					value: item[valueKey],
+					text: item[textKey]
+				})
+			);
+		}
 	});
 }
 
-function placeholderColorEditSelect() {	
-	$('select[id^="edit"]').each(function () {
-	    var $select = $(this);
-	    var $dropdown = $select.closest('.bootstrap-select');
-	    var $filterOption = $dropdown.find('.filter-option-inner-inner');
+function populateSelectOptions() {
+	$.ajax({
+		url: '/bookstudio/StudentServlet',
+		type: 'GET',
+		data: { type: 'populateSelects' },
+		dataType: 'json',
+		success: function(data) {
+			if (data) {
+				facultyList = data.faculties;
 
-	    if ($filterOption.text().trim() === "No hay selección") {
-	        $filterOption.css('color', 'var(--placeholder-color)');
-	    } else {
-	        $filterOption.css('color', 'var(--bs-body-color)');
-	    }
+				populateSelect('#addStudentFaculty', facultyList, 'facultyId', 'facultyName');
+
+				populateSelect('#editStudentFaculty', facultyList, 'facultyId', 'facultyName');
+			}
+		},
+		error: function(status, error) {
+			console.error("Error al obtener los datos para los select:", status, error);
+		}
+	});
+}
+
+function placeholderColorSelect() {
+	$('select.selectpicker').on('change', function() {
+		var $select = $(this);
+		var $dropdown = $select.closest('.bootstrap-select');
+		var $filterOption = $dropdown.find('.filter-option-inner-inner');
+
+		if ($select.val() !== "" && $select.val() !== null) {
+			$dropdown.removeClass('placeholder-color');
+			$filterOption.css('color', 'var(--bs-body-color)');
+		}
+	});
+}
+
+function placeholderColorEditSelect() {
+	$('select[id^="edit"]').each(function() {
+		var $select = $(this);
+		var $dropdown = $select.closest('.bootstrap-select');
+		var $filterOption = $dropdown.find('.filter-option-inner-inner');
+
+		if ($filterOption.text().trim() === "No hay selección") {
+			$filterOption.css('color', 'var(--placeholder-color)');
+		} else {
+			$filterOption.css('color', 'var(--bs-body-color)');
+		}
 	});
 }
 
 function placeholderColorDateInput() {
 	$('input[type="date"]').each(function() {
-        var $input = $(this);
+		var $input = $(this);
 
-        if (!$input.val()) {
-            $input.css('color', 'var(--placeholder-color)');
-        } else {
-            $input.css('color', '');
-        }
-    });
-	
+		if (!$input.val()) {
+			$input.css('color', 'var(--placeholder-color)');
+		} else {
+			$input.css('color', '');
+		}
+	});
+
 	$('input[type="date"]').on('change input', function() {
-	    var $input = $(this);
+		var $input = $(this);
 
-	    if (!$input.val()) {
-	        $input.css('color', 'var(--placeholder-color)');
-	    } else {
-	        $input.css('color', '');
-	    }
+		if (!$input.val()) {
+			$input.css('color', 'var(--placeholder-color)');
+		} else {
+			$input.css('color', '');
+		}
 	});
 }
 
@@ -106,142 +106,140 @@ function placeholderColorDateInput() {
 
 function generateRow(student) {
 	const userRole = sessionStorage.getItem('userRole');
-	
-    return `
-        <tr>
-            <td class="align-middle text-start">${student.studentId}</td>
-            <td class="align-middle text-start">${student.dni}</td>
-            <td class="align-middle text-start">${student.firstName}</td>
+
+	return `
+		<tr>
+			<td class="align-middle text-start">${student.studentId}</td>
+			<td class="align-middle text-start">${student.dni}</td>
+			<td class="align-middle text-start">${student.firstName}</td>
 			<td class="align-middle text-start">${student.lastName}</td>
 			<td class="align-middle text-start">${student.phone}</td>
 			<td class="align-middle text-start">${student.email}</td>
-            <td class="align-middle text-center">
-                ${student.status === 'activo' 
-					? '<span class="badge text-success-emphasis bg-success-subtle border border-success-subtle p-1">Activo</span>' 
+			<td class="align-middle text-center">
+				${student.status === 'activo'
+					? '<span class="badge text-success-emphasis bg-success-subtle border border-success-subtle p-1">Activo</span>'
 					: '<span class="badge text-danger-emphasis bg-danger-subtle border border-danger-subtle p-1">Inactivo</span>'}
-            </td>
-            <td class="align-middle text-center">
-                <div class="d-inline-flex gap-2">
+			</td>
+			<td class="align-middle text-center">
+				<div class="d-inline-flex gap-2">
 					<button class="btn btn-sm btn-icon-hover" data-tooltip="tooltip" data-bs-placement="top" title="Detalles"
-					    data-bs-toggle="modal" data-bs-target="#detailsStudentModal" data-id="${student.studentId}">
-					    <i class="bi bi-eye"></i>
+						data-bs-toggle="modal" data-bs-target="#detailsStudentModal" data-id="${student.studentId}">
+						<i class="bi bi-eye"></i>
 					</button>
-					
-					${userRole === 'administrador' ? 
+					${userRole === 'administrador' ?
 						`<button class="btn btn-sm btn-icon-hover" data-tooltip="tooltip" data-bs-placement="top" title="Editar"
-						    data-bs-toggle="modal" data-bs-target="#editStudentModal" data-id="${student.studentId}">
-						    <i class="bi bi-pencil"></i>
+							data-bs-toggle="modal" data-bs-target="#editStudentModal" data-id="${student.studentId}">
+							<i class="bi bi-pencil"></i>
 						</button>`
-	                    : ''
-                    }
-                </div>
-            </td>
-        </tr>
-    `;
+					: ''}
+				</div>
+			</td>
+		</tr>
+	`;
 }
 
 function addRowToTable(student) {
 	var table = $('#studentTable').DataTable();
-    var rowHtml = generateRow(student);
-    var $row = $(rowHtml);
+	var rowHtml = generateRow(student);
+	var $row = $(rowHtml);
 
-    table.row.add($row).draw();
+	table.row.add($row).draw();
 
-    initializeTooltips($row);
+	initializeTooltips($row);
 }
 
 function loadStudents() {
 	toggleButtonAndSpinner('loading');
-	    
-    let safetyTimer = setTimeout(function() {
-        toggleButtonAndSpinner('loaded');
-        $('#tableContainer').removeClass('d-none');
-        $('#cardContainer').removeClass('h-100');
-    }, 8000);
-	
-    $.ajax({
-        url: '/bookstudio/StudentServlet',
-        type: 'GET',
-        data: { type: 'list' },
-        dataType: 'json',
-        success: function (data) {
+
+	let safetyTimer = setTimeout(function() {
+		toggleButtonAndSpinner('loaded');
+		$('#tableContainer').removeClass('d-none');
+		$('#cardContainer').removeClass('h-100');
+	}, 8000);
+
+	$.ajax({
+		url: '/bookstudio/StudentServlet',
+		type: 'GET',
+		data: { type: 'list' },
+		dataType: 'json',
+		success: function(data) {
 			clearTimeout(safetyTimer);
-			
+
 			var tableBody = $('#bodyStudents');
 			tableBody.empty();
-			
+
 			if (data && data.length > 0) {
-                data.forEach(function(student) {
-                    var row = generateRow(student);
-                    tableBody.append(row);
-                });
-                
-                initializeTooltips(tableBody);
-            }
-			
+				data.forEach(function(student) {
+					var row = generateRow(student);
+					tableBody.append(row);
+				});
+
+				initializeTooltips(tableBody);
+			}
+
 			if ($.fn.DataTable.isDataTable('#bookTable')) {
-                $('#studentTable').DataTable().destroy();
-            }
-            
+				$('#studentTable').DataTable().destroy();
+			}
+
 			let dataTable = setupDataTable('#studentTable');
 
 			if (data && data.length > 0) {
-                $("#generatePDF").prop("disabled", false);
-            } else {
-                $("#generatePDF").prop("disabled", true);
-            }
+				$("#generatePDF").prop("disabled", false);
+			} else {
+				$("#generatePDF").prop("disabled", true);
+			}
 
-            dataTable.on('draw', function () {
-                const noDataMessage = $("#studentTable").find("td.dataTables_empty").length > 0;
-                if (noDataMessage) {
-                    $("#generatePDF").prop("disabled", true);
-                } else {
-                    $("#generatePDF").prop("disabled", false);
-                }
-            });
+			dataTable.on('draw', function() {
+				const noDataMessage = $("#studentTable").find("td.dataTables_empty").length > 0;
+				if (noDataMessage) {
+					$("#generatePDF").prop("disabled", true);
+				} else {
+					$("#generatePDF").prop("disabled", false);
+				}
+			});
 
-			$("#generatePDF").off("click").on("click", function () {
-		        generatePDF(dataTable);
-		    });
-        },
-        error: function (status, error) {
+			$("#generatePDF").off("click").on("click", function() {
+				generatePDF(dataTable);
+			});
+		},
+		error: function(status, error) {
 			clearTimeout(safetyTimer);
-            console.error("Error en la solicitud AJAX:", status, error);
-            
-            var tableBody = $('#bodyStudents');
-            tableBody.empty();
-            
-            if ($.fn.DataTable.isDataTable('#studentTable')) {
-                $('#studentTable').DataTable().destroy();
-            }
-            
-            setupDataTable('#studentTable');
-        }
-    });
+			console.error("Error en la solicitud AJAX:", status, error);
+
+			var tableBody = $('#bodyStudents');
+			tableBody.empty();
+
+			if ($.fn.DataTable.isDataTable('#studentTable')) {
+				$('#studentTable').DataTable().destroy();
+			}
+
+			setupDataTable('#studentTable');
+		}
+	});
 }
 
 function updateRowInTable(student) {
-    var table = $('#studentTable').DataTable();
+	var table = $('#studentTable').DataTable();
 
-    var row = table.rows().nodes().to$().filter(function() {
-        return $(this).find('td').eq(0).text() === student.studentId.toString();
-    });
+	var row = table.rows().nodes().to$().filter(function() {
+		return $(this).find('td').eq(0).text() === student.studentId.toString();
+	});
 
-    if (row.length > 0) {
-        row.find('td').eq(1).text(student.dni);
-        row.find('td').eq(2).text(student.firstName);
-        row.find('td').eq(3).text(student.lastName);
-        row.find('td').eq(4).text(student.phone);
+	if (row.length > 0) {
+		row.find('td').eq(1).text(student.dni);
+		row.find('td').eq(2).text(student.firstName);
+		row.find('td').eq(3).text(student.lastName);
+		row.find('td').eq(4).text(student.phone);
 		row.find('td').eq(5).text(student.email);
 
-        row.find('td').eq(6).html(student.status === 'activo' 
-			? '<span class="badge text-success-emphasis bg-success-subtle border border-success-subtle p-1">Activo</span>' 
+		row.find('td').eq(6).html(student.status === 'activo'
+			? '<span class="badge text-success-emphasis bg-success-subtle border border-success-subtle p-1">Activo</span>'
 			: '<span class="badge text-danger-emphasis bg-danger-subtle border border-danger-subtle p-1">Inactivo</span>');
-        
-        table.row(row).invalidate().draw();
-		
+
+		table.row(row).invalidate().draw();
+
 		initializeTooltips(row);
-    }
+	}
 }
 
 /*****************************************
@@ -250,379 +248,379 @@ function updateRowInTable(student) {
 
 function handleAddStudentForm() {
 	let isFirstSubmit = true;
-	
-	$('#addStudentModal').on('hidden.bs.modal', function () {
-        isFirstSubmit = true;
+
+	$('#addStudentModal').on('hidden.bs.modal', function() {
+		isFirstSubmit = true;
 		$('#addStudentForm').data("submitted", false);
-    });
-	
-	$('#addStudentForm').on('input change', 'input, select', function () {
-	    if (!isFirstSubmit) {
-	        validateAddField($(this));
-	    }
 	});
-	
-    $('#addStudentForm').on('submit', function (event) {
-        event.preventDefault();
-		
+
+	$('#addStudentForm').on('input change', 'input, select', function() {
+		if (!isFirstSubmit) {
+			validateAddField($(this));
+		}
+	});
+
+	$('#addStudentForm').on('submit', function(event) {
+		event.preventDefault();
+
 		if ($(this).data("submitted") === true) {
-		    return;
+			return;
 		}
 		$(this).data("submitted", true);
-		
-		if (isFirstSubmit) {
-	        isFirstSubmit = false;
-	    }
-		
-		var form = $(this)[0];
-        var isValid = true;
 
-        $(form).find('input, select').not('.bootstrap-select input[type="search"]').each(function () {
-            const field = $(this);
-            const valid = validateAddField(field);
-            if (!valid) {
-                isValid = false;
-            }
-        });
+		if (isFirstSubmit) {
+			isFirstSubmit = false;
+		}
+
+		var form = $(this)[0];
+		var isValid = true;
+
+		$(form).find('input, select').not('.bootstrap-select input[type="search"]').each(function() {
+			const field = $(this);
+			const valid = validateAddField(field);
+			if (!valid) {
+				isValid = false;
+			}
+		});
 
 		if (isValid) {
 			var data = $(this).serialize() + '&type=create';
-			
+
 			var submitButton = $(this).find('[type="submit"]');
 			submitButton.prop('disabled', true);
 			$("#addStudentSpinner").removeClass("d-none");
 			$("#addStudentIcon").addClass("d-none");
-			
-	        $.ajax({
-	            url: '/bookstudio/StudentServlet',
-	            type: 'POST',
-	            data: data,
-	            dataType: 'json',
-	            success: function (response) {
-	                if (response && response.success) {
-	                    addRowToTable(response.data); 
-	                    $('#addStudentModal').modal('hide');
-	                    showToast('Estudiante agregado exitosamente.', 'success');
-	                } else {
+
+			$.ajax({
+				url: '/bookstudio/StudentServlet',
+				type: 'POST',
+				data: data,
+				dataType: 'json',
+				success: function(response) {
+					if (response && response.success) {
+						addRowToTable(response.data);
+						$('#addStudentModal').modal('hide');
+						showToast('Estudiante agregado exitosamente.', 'success');
+					} else {
 						if (response.field) {
-				            setFieldError(response.field, response.message);
+							setFieldError(response.field, response.message);
 							$('#addStudentForm').data("submitted", false);
-				        }
-				        else {
-				            showToast(response.message, 'error');
-				            $('#addStudentModal').modal('hide');
-				        }
-		            }
-	            },
-				error: function (xhr) {
-					var errorMessage = (xhr.responseJSON && xhr.responseJSON.message) 
-		                ? xhr.responseJSON.message 
-		                : 'Hubo un error al agregar el estudiante.';
-		            var errorField = xhr.responseJSON && xhr.responseJSON.field 
-		                ? xhr.responseJSON.field 
-		                : null;
-		            
+						}
+						else {
+							showToast(response.message, 'error');
+							$('#addStudentModal').modal('hide');
+						}
+					}
+				},
+				error: function(xhr) {
+					var errorMessage = (xhr.responseJSON && xhr.responseJSON.message)
+						? xhr.responseJSON.message
+						: 'Hubo un error al agregar el estudiante.';
+					var errorField = xhr.responseJSON && xhr.responseJSON.field
+						? xhr.responseJSON.field
+						: null;
+
 					if (errorField) {
-				        setFieldError(errorField, errorMessage);
+						setFieldError(errorField, errorMessage);
 						$('#addStudentForm').data("submitted", false);
-				    } else {
-				        showToast(errorMessage, 'error');
-				        $('#addStudentModal').modal('hide');
-				    }
-	            },
+					} else {
+						showToast(errorMessage, 'error');
+						$('#addStudentModal').modal('hide');
+					}
+				},
 				complete: function() {
-				    $("#addStudentSpinner").addClass("d-none");
-				    $("#addStudentIcon").removeClass("d-none");
-				    submitButton.prop('disabled', false);
+					$("#addStudentSpinner").addClass("d-none");
+					$("#addStudentIcon").removeClass("d-none");
+					submitButton.prop('disabled', false);
 				}
-	        });
+			});
 			function setFieldError(fieldId, message) {
-			    var field = $('#' + fieldId);
-			    field.addClass('is-invalid');
-			    field.siblings('.invalid-feedback').html(message).show();
+				var field = $('#' + fieldId);
+				field.addClass('is-invalid');
+				field.siblings('.invalid-feedback').html(message).show();
 			}
 		} else {
 			$(this).data("submitted", false);
 		}
-    });
-	
+	});
+
 	function validateAddField(field) {
 		if (field.attr('type') === 'search') {
-	        return true;
-	    }
-		
-        var errorMessage = 'Este campo es obligatorio.';
-        var isValid = true;
-		
+			return true;
+		}
+
+		var errorMessage = 'Este campo es obligatorio.';
+		var isValid = true;
+
 		// Default validation
 		if (!field.val() || (field[0].checkValidity && !field[0].checkValidity())) {
-	        field.addClass('is-invalid');
-	        field.siblings('.invalid-feedback').html(errorMessage);
-	        isValid = false;
-	    } else {
-	        field.removeClass('is-invalid');
-	    }
-		
+			field.addClass('is-invalid');
+			field.siblings('.invalid-feedback').html(errorMessage);
+			isValid = false;
+		} else {
+			field.removeClass('is-invalid');
+		}
+
 		// DNI validation
-	    if (field.is('#addStudentDNI')) {
-	        const dni = field.val();
-	        const dniPattern = /^\d{8}$/;
-	        if (!dniPattern.test(dni)) {
-	            errorMessage = 'El DNI debe contener exactamente 8 dígitos numéricos.';
-	            isValid = false;
-	        }
-	    }
-		
+		if (field.is('#addStudentDNI')) {
+			const dni = field.val();
+			const dniPattern = /^\d{8}$/;
+			if (!dniPattern.test(dni)) {
+				errorMessage = 'El DNI debe contener exactamente 8 dígitos numéricos.';
+				isValid = false;
+			}
+		}
+
 		// Name validation
 		if (field.is('#addStudentFirstName')) {
-		    const firstName = field.val();
+			const firstName = field.val();
 
-		    if (firstName.length < 3) {
-		        errorMessage = 'El nombre debe tener al menos 3 caracteres.';
-		        isValid = false;
-		    }
+			if (firstName.length < 3) {
+				errorMessage = 'El nombre debe tener al menos 3 caracteres.';
+				isValid = false;
+			}
 		}
 
 		// Last name validation
 		if (field.is('#addStudentLastName')) {
-		    const lastName = field.val();
+			const lastName = field.val();
 
-		    if (lastName.length < 3) {
-		        errorMessage = 'El apellido debe tener al menos 3 caracteres.';
-		        isValid = false;
-		    }
+			if (lastName.length < 3) {
+				errorMessage = 'El apellido debe tener al menos 3 caracteres.';
+				isValid = false;
+			}
 		}
-		
+
 		// Address validation
-	    if (field.is('#addStudentAddress')) {
-	        const address = field.val();
-	        if (address.length < 5) {
-	            errorMessage = 'La dirección debe tener al menos 5 caracteres.';
-	            isValid = false;
-	        } else if (!/^[A-Za-z0-9\s,.\-#]+$/.test(address)) {
-	            errorMessage = 'La dirección solo puede contener letras, números y los caracteres especiales: ,.-#';
-	            isValid = false;
-	        }
-	    }
-		
+		if (field.is('#addStudentAddress')) {
+			const address = field.val();
+			if (address.length < 5) {
+				errorMessage = 'La dirección debe tener al menos 5 caracteres.';
+				isValid = false;
+			} else if (!/^[A-Za-z0-9\s,.\-#]+$/.test(address)) {
+				errorMessage = 'La dirección solo puede contener letras, números y los caracteres especiales: ,.-#';
+				isValid = false;
+			}
+		}
+
 		// Phone validation
 		if (field.is('#addStudentPhone')) {
-		    const phone = field.val();
-		    if (!/^[9]\d{8}$/.test(phone)) {
-		        errorMessage = 'El número de teléfono debe comenzar con 9 y tener exactamente 9 dígitos.';
-		        isValid = false;
-		    }
+			const phone = field.val();
+			if (!/^[9]\d{8}$/.test(phone)) {
+				errorMessage = 'El número de teléfono debe comenzar con 9 y tener exactamente 9 dígitos.';
+				isValid = false;
+			}
 		}
 
 		// Email validation
 		if (field.is('#addStudentEmail')) {
-	        const email = field.val();
-	        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+			const email = field.val();
+			const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-	        if (!emailRegex.test(email)) {
-	            errorMessage = 'Por favor ingrese un correo electrónico válido.';
-	            isValid = false;
-	        }
-	    }
-		
+			if (!emailRegex.test(email)) {
+				errorMessage = 'Por favor ingrese un correo electrónico válido.';
+				isValid = false;
+			}
+		}
+
 		// Birthdate validation
-	    if (field.is('#addStudentBirthDate')) {
-	        const birthDate = new Date(field.val());
-	        const today = new Date();
-	        if (birthDate > today) {
-	            errorMessage = 'La fecha de nacimiento no puede ser en el futuro.';
-	            isValid = false;
-	        }
-	    }
+		if (field.is('#addStudentBirthDate')) {
+			const birthDate = new Date(field.val());
+			const today = new Date();
+			if (birthDate > today) {
+				errorMessage = 'La fecha de nacimiento no puede ser en el futuro.';
+				isValid = false;
+			}
+		}
 
 		// Select validation
-	    if (field.is('select')) {
-	        var container = field.closest('.bootstrap-select');
-	        container.toggleClass('is-invalid', field.hasClass('is-invalid'));
-	        container.siblings('.invalid-feedback').html(errorMessage);
-	    }
+		if (field.is('select')) {
+			var container = field.closest('.bootstrap-select');
+			container.toggleClass('is-invalid', field.hasClass('is-invalid'));
+			container.siblings('.invalid-feedback').html(errorMessage);
+		}
 
-	    if (!isValid) {
-	        field.addClass('is-invalid');
-	        field.siblings('.invalid-feedback').html(errorMessage).show();
-	    } else {
-	        field.removeClass('is-invalid');
-	        field.siblings('.invalid-feedback').hide();
-	    }
+		if (!isValid) {
+			field.addClass('is-invalid');
+			field.siblings('.invalid-feedback').html(errorMessage).show();
+		} else {
+			field.removeClass('is-invalid');
+			field.siblings('.invalid-feedback').hide();
+		}
 
-        return isValid;
-    }
+		return isValid;
+	}
 }
 
 function handleEditStudentForm() {
 	let isFirstSubmit = true;
-	
-	$('#editStudentModal').on('hidden.bs.modal', function () {
-        isFirstSubmit = true;
+
+	$('#editStudentModal').on('hidden.bs.modal', function() {
+		isFirstSubmit = true;
 		$('#editStudentForm').data("submitted", false);
-    });
-	
-	$('#editStudentForm').on('input change', 'input, select', function () {
+	});
+
+	$('#editStudentForm').on('input change', 'input, select', function() {
 		if (!isFirstSubmit) {
-	        validateEditField($(this));
-	    }
-    });
-	
-    $('#editStudentForm').on('submit', function(event) {
-        event.preventDefault();
-		
+			validateEditField($(this));
+		}
+	});
+
+	$('#editStudentForm').on('submit', function(event) {
+		event.preventDefault();
+
 		if ($(this).data("submitted") === true) {
-            return;
-        }
-        $(this).data("submitted", true);
-		
+			return;
+		}
+		$(this).data("submitted", true);
+
 		if (isFirstSubmit) {
-	        isFirstSubmit = false;
-	    }
+			isFirstSubmit = false;
+		}
 
 		var form = $(this)[0];
-        var isValid = true;
+		var isValid = true;
 
-		$(form).find('input, select').not('.bootstrap-select input[type="search"]').each(function () {
-            const field = $(this);
-            const valid = validateEditField(field);
-            if (!valid) {
-                isValid = false;
-            }
-        });
-		
+		$(form).find('input, select').not('.bootstrap-select input[type="search"]').each(function() {
+			const field = $(this);
+			const valid = validateEditField(field);
+			if (!valid) {
+				isValid = false;
+			}
+		});
+
 		if (isValid) {
 			var data = $(this).serialize() + '&type=update';
-			
+
 			var studentId = $(this).data('studentId');
 			if (studentId) {
-			    data += '&studentId=' + encodeURIComponent(studentId);
+				data += '&studentId=' + encodeURIComponent(studentId);
 			}
-			
+
 			var submitButton = $(this).find('[type="submit"]');
 			submitButton.prop('disabled', true);
 			$("#editStudentSpinner").removeClass("d-none");
 			$("#editStudentIcon").addClass("d-none");
-			
+
 			$.ajax({
-	            url: '/bookstudio/StudentServlet',
-	            type: 'POST',
-	            data: data,
-	            dataType: 'json',
-	            success: function(response) {
-	                if (response && response.success) {
-	                    updateRowInTable(response.data);
-	                    $('#editStudentModal').modal('hide');
-	                    showToast('Estudiante actualizado exitosamente.', 'success');
-	    			} else {
+				url: '/bookstudio/StudentServlet',
+				type: 'POST',
+				data: data,
+				dataType: 'json',
+				success: function(response) {
+					if (response && response.success) {
+						updateRowInTable(response.data);
+						$('#editStudentModal').modal('hide');
+						showToast('Estudiante actualizado exitosamente.', 'success');
+					} else {
 						if (response.field) {
-				            setFieldError(response.field, response.message);
+							setFieldError(response.field, response.message);
 							$('#editStudentForm').data("submitted", false);
-				        }
-				        else {
-				            showToast(response.message, 'error');
-				            $('#editStudentModal').modal('hide');
-				        }
-	                }
-	            },
-				error: function (xhr) {
-					var errorMessage = (xhr.responseJSON && xhr.responseJSON.message) 
-		                ? xhr.responseJSON.message 
-		                : 'Hubo un error al editar el estudiante.';
-		            var errorField = xhr.responseJSON && xhr.responseJSON.field 
-		                ? xhr.responseJSON.field
-		                : null;
-		            
+						}
+						else {
+							showToast(response.message, 'error');
+							$('#editStudentModal').modal('hide');
+						}
+					}
+				},
+				error: function(xhr) {
+					var errorMessage = (xhr.responseJSON && xhr.responseJSON.message)
+						? xhr.responseJSON.message
+						: 'Hubo un error al editar el estudiante.';
+					var errorField = xhr.responseJSON && xhr.responseJSON.field
+						? xhr.responseJSON.field
+						: null;
+
 					if (errorField) {
-				        setFieldError(errorField, errorMessage);
+						setFieldError(errorField, errorMessage);
 						$('#editStudentForm').data("submitted", false);
-				    } else {
-				        showToast(errorMessage, 'error');
-				        $('#editStudentModal').modal('hide');
-				    }
-	            },
+					} else {
+						showToast(errorMessage, 'error');
+						$('#editStudentModal').modal('hide');
+					}
+				},
 				complete: function() {
 					$("#editStudentSpinner").addClass("d-none");
 					$("#editStudentIcon").removeClass("d-none");
-				    submitButton.prop('disabled', false);
+					submitButton.prop('disabled', false);
 				}
-	        });
+			});
 			function setFieldError(fieldId, message) {
-			    var field = $('#' + fieldId);
-			    field.addClass('is-invalid');
-			    field.siblings('.invalid-feedback').html(message).show();
+				var field = $('#' + fieldId);
+				field.addClass('is-invalid');
+				field.siblings('.invalid-feedback').html(message).show();
 			}
 		} else {
 			$(this).data("submitted", false);
 		}
-    });
+	});
 }
 
 function validateEditField(field) {
 	if (field.attr('type') === 'search') {
-        return true;
-    }
-	
-    var errorMessage = 'Este campo es obligatorio.';
-    var isValid = true;
+		return true;
+	}
+
+	var errorMessage = 'Este campo es obligatorio.';
+	var isValid = true;
 
 	// Default validation
 	if (!field.val() || (field[0].checkValidity && !field[0].checkValidity())) {
-        field.addClass('is-invalid');
-        field.siblings('.invalid-feedback').html(errorMessage);
-        isValid = false;
-    } else {
-        field.removeClass('is-invalid');
-    }
-	
+		field.addClass('is-invalid');
+		field.siblings('.invalid-feedback').html(errorMessage);
+		isValid = false;
+	} else {
+		field.removeClass('is-invalid');
+	}
+
 	// Address validation
-    if (field.is('#editStudentAddress')) {
-        const address = field.val();
-        if (address.length < 5) {
-            errorMessage = 'La dirección debe tener al menos 5 caracteres.';
-            isValid = false;
-        } else if (!/^[A-Za-z0-9\s,.\-#]+$/.test(address)) {
-            errorMessage = 'La dirección solo puede contener letras, números y los caracteres especiales: ,.-#';
-            isValid = false;
-        }
-    }
-	
+	if (field.is('#editStudentAddress')) {
+		const address = field.val();
+		if (address.length < 5) {
+			errorMessage = 'La dirección debe tener al menos 5 caracteres.';
+			isValid = false;
+		} else if (!/^[A-Za-z0-9\s,.\-#]+$/.test(address)) {
+			errorMessage = 'La dirección solo puede contener letras, números y los caracteres especiales: ,.-#';
+			isValid = false;
+		}
+	}
+
 	// Phone validation
 	if (field.is('#editStudentPhone')) {
-	    const phone = field.val();
-	    if (!/^[9]\d{8}$/.test(phone)) {
-	        errorMessage = 'El número de teléfono debe comenzar con 9 y tener exactamente 9 dígitos.';
-	        isValid = false;
-	    }
+		const phone = field.val();
+		if (!/^[9]\d{8}$/.test(phone)) {
+			errorMessage = 'El número de teléfono debe comenzar con 9 y tener exactamente 9 dígitos.';
+			isValid = false;
+		}
 	}
 
 	// Email validation
 	if (field.is('#editStudentEmail')) {
-        const email = field.val();
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+		const email = field.val();
+		const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-        if (!emailRegex.test(email)) {
-            errorMessage = 'Por favor ingrese un correo electrónico válido.';
-            isValid = false;
-        }
-    }
-	
-	// Select validation
-	if (field.is('select')) {
-	    var container = field.closest('.bootstrap-select');
-	    container.toggleClass('is-invalid', field.hasClass('is-invalid'));
-	    container.siblings('.invalid-feedback').html('Opción seleccionada inactiva o no existente.');
+		if (!emailRegex.test(email)) {
+			errorMessage = 'Por favor ingrese un correo electrónico válido.';
+			isValid = false;
+		}
 	}
 
-    if (!isValid) {
-        field.addClass('is-invalid');
-        field.siblings('.invalid-feedback').html(errorMessage).show();
-    } else {
-        field.removeClass('is-invalid');
-        field.siblings('.invalid-feedback').hide();
-    }
+	// Select validation
+	if (field.is('select')) {
+		var container = field.closest('.bootstrap-select');
+		container.toggleClass('is-invalid', field.hasClass('is-invalid'));
+		container.siblings('.invalid-feedback').html('Opción seleccionada inactiva o no existente.');
+	}
 
-    return isValid;
+	if (!isValid) {
+		field.addClass('is-invalid');
+		field.siblings('.invalid-feedback').html(errorMessage).show();
+	} else {
+		field.removeClass('is-invalid');
+		field.siblings('.invalid-feedback').hide();
+	}
+
+	return isValid;
 }
 
 /*****************************************
@@ -631,54 +629,54 @@ function validateEditField(field) {
 
 function loadModalData() {
 	// Add Modal
-    $(document).on('click', '[data-bs-target="#addStudentModal"]', function () {
+	$(document).on('click', '[data-bs-target="#addStudentModal"]', function() {
 		$('#addStudentGender').selectpicker('destroy').empty().append(
-            $('<option>', {
-                value: 'Masculino',
-                text: 'Masculino'
-            }),
-            $('<option>', {
-                value: 'Femenino',
-                text: 'Femenino'
-            })
-        );	
+			$('<option>', {
+				value: 'Masculino',
+				text: 'Masculino'
+			}),
+			$('<option>', {
+				value: 'Femenino',
+				text: 'Femenino'
+			})
+		);
 		$('#addStudentGender').selectpicker();
-		
+
 		populateSelect('#addStudentFaculty', facultyList, 'facultyId', 'facultyName');
 		$('#addStudentFaculty').selectpicker();
-		
+
 		$('#addStudentStatus').selectpicker('destroy').empty().append(
-            $('<option>', {
-                value: 'activo',
-                text: 'Activo'
-            }),
-            $('<option>', {
-                value: 'inactivo',
-                text: 'Inactivo'
-            })
-        );
+			$('<option>', {
+				value: 'activo',
+				text: 'Activo'
+			}),
+			$('<option>', {
+				value: 'inactivo',
+				text: 'Inactivo'
+			})
+		);
 		$('#addStudentStatus').selectpicker();
-		
+
 		$('#addStudentForm')[0].reset();
 		$('#addStudentForm .is-invalid').removeClass('is-invalid');
-				
+
 		placeholderColorDateInput();
-    });
+	});
 
-    // Details Modal
-    $(document).on('click', '[data-bs-target="#detailsStudentModal"]', function() {
-        var studentId = $(this).data('id');
+	// Details Modal
+	$(document).on('click', '[data-bs-target="#detailsStudentModal"]', function() {
+		var studentId = $(this).data('id');
 
-        $.ajax({
-            url: '/bookstudio/StudentServlet',
-            type: 'GET',
-            data: { type: 'details', studentId: studentId },
-            dataType: 'json',
-            success: function(data) {
-                $('#detailsStudentID').text(data.studentId);
-                $('#detailsStudentDNI').text(data.dni);
-                $('#detailsStudentFirstName').text(data.firstName);
-				$('#detailsStudentLastName').text(data.lastName);								
+		$.ajax({
+			url: '/bookstudio/StudentServlet',
+			type: 'GET',
+			data: { type: 'details', studentId: studentId },
+			dataType: 'json',
+			success: function(data) {
+				$('#detailsStudentID').text(data.studentId);
+				$('#detailsStudentDNI').text(data.dni);
+				$('#detailsStudentFirstName').text(data.firstName);
+				$('#detailsStudentLastName').text(data.lastName);
 				$('#detailsStudentAddress').text(data.address);
 				$('#detailsStudentPhone').text(data.phone);
 				$('#detailsStudentEmail').text(data.email);
@@ -686,28 +684,28 @@ function loadModalData() {
 				$('#detailsStudentGender').text(data.gender);
 				$('#detailsStudentFaculty').text(data.facultyName);
 				$('#detailsStudentStatus').html(
-				    data.status === 'activo' 
-				        ? '<span class="badge bg-success p-1">Activo</span>' 
-				        : '<span class="badge bg-danger p-1">Inactivo</span>'
+					data.status === 'activo'
+						? '<span class="badge bg-success p-1">Activo</span>'
+						: '<span class="badge bg-danger p-1">Inactivo</span>'
 				);
-            },
-            error: function(status, error) {
-                console.log("Error al cargar los detalles del estudiante:", status, error);
-            }
-        });
-    });
-	
-    // Edit Modal
-    $(document).on('click', '[data-bs-target="#editStudentModal"]', function() {
-        var studentId = $(this).data('id');
+			},
+			error: function(status, error) {
+				console.log("Error al cargar los detalles del estudiante:", status, error);
+			}
+		});
+	});
 
-        $.ajax({
-            url: '/bookstudio/StudentServlet',
-            type: 'GET',
-            data: { type: 'details', studentId: studentId },
-            dataType: 'json',
-            success: function(data) {
-				$('#editStudentForm').data('studentId', data.studentId);			
+	// Edit Modal
+	$(document).on('click', '[data-bs-target="#editStudentModal"]', function() {
+		var studentId = $(this).data('id');
+
+		$.ajax({
+			url: '/bookstudio/StudentServlet',
+			type: 'GET',
+			data: { type: 'details', studentId: studentId },
+			dataType: 'json',
+			success: function(data) {
+				$('#editStudentForm').data('studentId', data.studentId);
 				$('#editStudentDNI').val(data.dni);
 				$('#editStudentFirstName').val(data.firstName);
 				$('#editStudentLastName').val(data.lastName);
@@ -715,165 +713,165 @@ function loadModalData() {
 				$('#editStudentPhone').val(data.phone);
 				$('#editStudentEmail').val(data.email);
 				$('#editStudentBirthDate').val(moment(data.birthDate).format('YYYY-MM-DD'));
-				
+
 				$('#editStudentGender').selectpicker('destroy').empty().append(
-	                $('<option>', {
-	                    value: 'Masculino',
-	                    text: 'Masculino'
-	                }),
-	                $('<option>', {
-	                    value: 'Femenino',
-	                    text: 'Femenino'
-	                })
-	            );	
+					$('<option>', {
+						value: 'Masculino',
+						text: 'Masculino'
+					}),
+					$('<option>', {
+						value: 'Femenino',
+						text: 'Femenino'
+					})
+				);
 				$('#editStudentGender').val(data.gender);
 				$('#editStudentGender').selectpicker();
-				
+
 				populateSelect('#editStudentFaculty', facultyList, 'facultyId', 'facultyName');
-                $('#editStudentFaculty').val(data.facultyId);
-                $('#editStudentFaculty').selectpicker();
-				
+				$('#editStudentFaculty').val(data.facultyId);
+				$('#editStudentFaculty').selectpicker();
+
 				$('#editStudentStatus').selectpicker('destroy').empty().append(
-	                $('<option>', {
-	                    value: 'activo',
-	                    text: 'Activo'
-	                }),
-	                $('<option>', {
-	                    value: 'inactivo',
-	                    text: 'Inactivo'
-	                })
-	            );
-                $('#editStudentStatus').val(data.status);
+					$('<option>', {
+						value: 'activo',
+						text: 'Activo'
+					}),
+					$('<option>', {
+						value: 'inactivo',
+						text: 'Inactivo'
+					})
+				);
+				$('#editStudentStatus').val(data.status);
 				$('#editStudentStatus').selectpicker();
-				
+
 				$('#editStudentForm .is-invalid').removeClass('is-invalid');
-				
+
 				placeholderColorEditSelect();
 				placeholderColorDateInput();
-				
+
 				$('#editStudentForm').find('select').each(function() {
-		            validateEditField($(this), true);
-		        });	
-            },
-            error: function(status, error) {
-                console.log("Error al cargar los detalles del estudiante para editar:", status, error);
-            }
-        });
-    });
+					validateEditField($(this), true);
+				});
+			},
+			error: function(status, error) {
+				console.log("Error al cargar los detalles del estudiante para editar:", status, error);
+			}
+		});
+	});
 }
 
 function setupBootstrapSelectDropdownStyles() {
-    const observer = new MutationObserver((mutationsList) => {
-        mutationsList.forEach((mutation) => {
-            mutation.addedNodes.forEach((node) => {
-                if (node.nodeType === 1 && node.classList.contains('dropdown-menu')) {
-                    const $dropdown = $(node);
-                    $dropdown.addClass('gap-1 px-2 rounded-3 mx-0 shadow');
-                    $dropdown.find('.dropdown-item').addClass('rounded-2 d-flex align-items-center justify-content-between'); // Alineación
+	const observer = new MutationObserver((mutationsList) => {
+		mutationsList.forEach((mutation) => {
+			mutation.addedNodes.forEach((node) => {
+				if (node.nodeType === 1 && node.classList.contains('dropdown-menu')) {
+					const $dropdown = $(node);
+					$dropdown.addClass('gap-1 px-2 rounded-3 mx-0 shadow');
+					$dropdown.find('.dropdown-item').addClass('rounded-2 d-flex align-items-center justify-content-between'); // Alineación
 
-                    $dropdown.find('li:not(:first-child)').addClass('mt-1');
+					$dropdown.find('li:not(:first-child)').addClass('mt-1');
 
-                    updateDropdownIcons($dropdown);
-                }
-            });
-        });
-    });
+					updateDropdownIcons($dropdown);
+				}
+			});
+		});
+	});
 
-    observer.observe(document.body, { childList: true, subtree: true });
+	observer.observe(document.body, { childList: true, subtree: true });
 
-    $(document).on('click', '.bootstrap-select .dropdown-item', function () {
-        const $dropdown = $(this).closest('.dropdown-menu');
-        updateDropdownIcons($dropdown);
-    });
+	$(document).on('click', '.bootstrap-select .dropdown-item', function() {
+		const $dropdown = $(this).closest('.dropdown-menu');
+		updateDropdownIcons($dropdown);
+	});
 }
 
 function updateDropdownIcons($dropdown) {
-    $dropdown.find('.dropdown-item').each(function () {
-        const $item = $(this);
-        let $icon = $item.find('i.bi-check2');
+	$dropdown.find('.dropdown-item').each(function() {
+		const $item = $(this);
+		let $icon = $item.find('i.bi-check2');
 
-        if ($item.hasClass('active') && $item.hasClass('selected')) {
-            if ($icon.length === 0) {
-                $('<i class="bi bi-check2 ms-auto"></i>').appendTo($item);
-            }
-        } else {
-            $icon.remove();
-        }
-    });
+		if ($item.hasClass('active') && $item.hasClass('selected')) {
+			if ($icon.length === 0) {
+				$('<i class="bi bi-check2 ms-auto"></i>').appendTo($item);
+			}
+		} else {
+			$icon.remove();
+		}
+	});
 }
 
 function initializeTooltips(container) {
-    $(container).find('[data-tooltip="tooltip"]').tooltip({
-        trigger: 'hover'
-    }).on('click', function() {
-        $(this).tooltip('hide');
-    });
+	$(container).find('[data-tooltip="tooltip"]').tooltip({
+		trigger: 'hover'
+	}).on('click', function() {
+		$(this).tooltip('hide');
+	});
 }
 
 function generatePDF(dataTable) {
-    const { jsPDF } = window.jspdf;
-    const doc = new jsPDF("l", "mm", "a4");
+	const { jsPDF } = window.jspdf;
+	const doc = new jsPDF("l", "mm", "a4");
 
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const margin = 10;
-    const topMargin = 5;
+	const pageWidth = doc.internal.pageSize.getWidth();
+	const margin = 10;
+	const topMargin = 5;
 
-    doc.addImage('/bookstudio/images/bookstudio-logo-no-bg.png', 'PNG', margin, topMargin - 5, 30, 30);
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(14);
-    doc.text("Lista de Estudiantes", pageWidth / 2, topMargin + 13, { align: "center" });
+	doc.addImage('/bookstudio/images/bookstudio-logo-no-bg.png', 'PNG', margin, topMargin - 5, 30, 30);
+	doc.setFont("helvetica", "bold");
+	doc.setFontSize(14);
+	doc.text("Lista de Estudiantes", pageWidth / 2, topMargin + 13, { align: "center" });
 
-    const fecha = new Date().toLocaleDateString();
-    const hora = new Date().toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+	const fecha = new Date().toLocaleDateString();
+	const hora = new Date().toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 
-    doc.setFont("helvetica", "normal");
-    doc.setFontSize(8);
-    doc.text(`Fecha: ${fecha}`, pageWidth - margin, topMargin + 10, { align: "right" });
-    doc.text(`Hora: ${hora}`, pageWidth - margin, topMargin + 15, { align: "right" });
+	doc.setFont("helvetica", "normal");
+	doc.setFontSize(8);
+	doc.text(`Fecha: ${fecha}`, pageWidth - margin, topMargin + 10, { align: "right" });
+	doc.text(`Hora: ${hora}`, pageWidth - margin, topMargin + 15, { align: "right" });
 
-    const data = dataTable.rows({ search: 'applied' }).nodes().toArray().map(row => {
-        let estado = row.cells[6].innerText.trim();
-        estado = estado.includes("Activo") ? "Activo" : "Inactivo";
+	const data = dataTable.rows({ search: 'applied' }).nodes().toArray().map(row => {
+		let estado = row.cells[6].innerText.trim();
+		estado = estado.includes("Activo") ? "Activo" : "Inactivo";
 
-        return [
-            row.cells[0].innerText.trim(),
-            row.cells[1].innerText.trim(),
-            row.cells[2].innerText.trim(),
-            row.cells[3].innerText.trim(),
-            row.cells[4].innerText.trim(),
-            row.cells[5].innerText.trim(),
-            estado
-        ];
-    });
+		return [
+			row.cells[0].innerText.trim(),
+			row.cells[1].innerText.trim(),
+			row.cells[2].innerText.trim(),
+			row.cells[3].innerText.trim(),
+			row.cells[4].innerText.trim(),
+			row.cells[5].innerText.trim(),
+			estado
+		];
+	});
 
-    doc.autoTable({
-        startY: topMargin + 25,
-        margin: { left: margin, right: margin },
-        head: [['ID', 'DNI', 'Nombres', 'Apellidos', 'Teléfono', 'Correo electrónico', 'Estado']],
-        body: data,
-        theme: 'grid',
-        headStyles: {
-            fillColor: [0, 0, 0],
-            textColor: 255,
-            fontStyle: 'bold',
-            fontSize: 8,
-            halign: 'left'
-        },
-        bodyStyles: {
-            font: "helvetica",
-            fontSize: 7,
-            halign: 'left'
-        },
-        didParseCell: function (data) {
-            if (data.section === 'body' && data.column.index === 6) {
-                data.cell.styles.textColor = data.cell.raw === "Activo"
-                    ? [0, 128, 0]
-                    : [255, 0, 0];
-            }
-        }
-    });
+	doc.autoTable({
+		startY: topMargin + 25,
+		margin: { left: margin, right: margin },
+		head: [['ID', 'DNI', 'Nombres', 'Apellidos', 'Teléfono', 'Correo electrónico', 'Estado']],
+		body: data,
+		theme: 'grid',
+		headStyles: {
+			fillColor: [0, 0, 0],
+			textColor: 255,
+			fontStyle: 'bold',
+			fontSize: 8,
+			halign: 'left'
+		},
+		bodyStyles: {
+			font: "helvetica",
+			fontSize: 7,
+			halign: 'left'
+		},
+		didParseCell: function(data) {
+			if (data.section === 'body' && data.column.index === 6) {
+				data.cell.styles.textColor = data.cell.raw === "Activo"
+					? [0, 128, 0]
+					: [255, 0, 0];
+			}
+		}
+	});
 
-    doc.output("dataurlnewwindow");
+	doc.output("dataurlnewwindow");
 }
 
 /*****************************************
@@ -881,12 +879,12 @@ function generatePDF(dataTable) {
  *****************************************/
 
 $(document).ready(function() {
-    loadStudents();
-    handleAddStudentForm();
+	loadStudents();
+	handleAddStudentForm();
 	handleEditStudentForm();
-    loadModalData();
+	loadModalData();
 	populateSelectOptions();
-    $('.selectpicker').selectpicker();
+	$('.selectpicker').selectpicker();
 	setupBootstrapSelectDropdownStyles();
 	placeholderColorSelect();
 });

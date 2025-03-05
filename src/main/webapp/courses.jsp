@@ -4,86 +4,94 @@
 <html lang="es" data-bs-theme="auto">
 <head>
 	<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <jsp:include page="WEB-INF/includes/styles.jsp"></jsp:include>
-    <title>BookStudio</title>
-    <link href="images/logo-dark.png" rel="icon" media="(prefers-color-scheme: light)">
-    <link href="images/logo-light.png" rel="icon" media="(prefers-color-scheme: dark)">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<jsp:include page="WEB-INF/includes/styles.jsp"></jsp:include>
+	<title>BookStudio</title>
+	<link href="images/logo-dark.png" rel="icon" media="(prefers-color-scheme: light)">
+	<link href="images/logo-light.png" rel="icon" media="(prefers-color-scheme: dark)">
 </head>
 <body>
 	<!-- Set user role from session -->
 	<c:set var="userRole" value="${sessionScope.role}" />
-	
+
 	<!-- ===================== Header ===================== -->
 	<jsp:include page="WEB-INF/includes/header.jsp"></jsp:include>
-	
+
 	<!-- ===================== Sidebar ==================== -->
 	<jsp:include page="WEB-INF/includes/sidebar.jsp">
-   		<jsp:param name="currentPage" value="courses.jsp" />
+		<jsp:param name="currentPage" value="courses.jsp" />
 	</jsp:include>
-		
+
 	<!-- ===================== Main Content ==================== -->
 	<main class="p-4 bg-body">
-	    <!-- Card Container -->
-	    <section id="cardContainer" class="card border">  
-	    	<!-- Card Header --> 
-	        <header class="card-header d-flex align-items-center position-relative" id="buttonGroupHeader"> 
-			    <h5 class="card-title text-body-emphasis mb-2 mt-2">Tabla Cursos</h5>
-			    
-			    <!-- Excel Button -->
-			    <button class="btn btn-custom-secondary excel d-flex align-items-center me-2" aria-label="Generar Excel" disabled>
-	                <i class="bi bi-file-earmark-excel text-success me-2"></i>
-	                Excel
-	            </button>
-			    
-			    <!-- PDF Button -->
-			    <button class="btn btn-custom-secondary d-flex align-items-center me-2" id="generatePDF" aria-label="Generar PDF" disabled>
-	                <i class="bi bi-file-earmark-pdf text-danger me-2"></i>
-	                PDF
-	            </button>
-			    
-			    <c:if test="${userRole == 'administrador'}">
-			    	<!-- Add Button -->
-	                <button class="btn btn-custom-primary d-flex align-items-center"
-				    	data-bs-toggle="modal" data-bs-target="#addCourseModal" aria-label="Agregar curso" disabled>
-				        <i class="bi bi-plus-lg me-2"></i>
-				        Agregar
-				    </button>
-	            </c:if>
-			</header>
-			   
-			<!-- Card Body -->
-	        <div class="card-body">
-	        	<!-- Loading Spinner -->
-		        <div id="spinnerLoad" class="d-flex justify-content-center align-items-center h-100">
-			        <div class="spinner-border" role="status">
-			            <span class="visually-hidden">Cargando...</span>
-			        </div>
-		    	</div>
+		<!-- Card Container -->
+		<section id="cardContainer" class="card border">
+			<!-- Card Header -->
+			<header
+				class="card-header d-flex align-items-center position-relative"
+				id="buttonGroupHeader">
+				<h5 class="card-title text-body-emphasis mb-2 mt-2">Tabla Cursos</h5>
 
-	            <!-- Table Container -->
-	            <div id="tableContainer" class="d-none small">
-	                <table id="courseTable" class="table table-sm">
-	                    <thead>
-	                        <tr>
-	                            <th scope="col" class="text-start">ID</th>
-	                            <th scope="col" class="text-start">Nombre</th>
-	                            <th scope="col" class="text-start">Nivel</th>
-	                            <th scope="col" class="text-start">Descripción</th>
-	                            <th scope="col" class="text-center">Estado</th>
-	                            <th scope="col" class="text-center"></th>
-	                        </tr>
-	                    </thead>
-	                    <tbody id="bodyCourses">
-	                        <!-- Data will be populated here via JavaScript -->
-	                    </tbody>
-	                </table>
-	            </div>
-	        </div>
-	    </section>
+				<!-- Excel Button -->
+				<button
+					class="btn btn-custom-secondary excel d-flex align-items-center me-2"
+					aria-label="Generar Excel" disabled>
+					<i class="bi bi-file-earmark-excel text-success me-2"></i>
+					Excel
+				</button>
+
+				<!-- PDF Button -->
+				<button
+					class="btn btn-custom-secondary d-flex align-items-center me-2"
+					id="generatePDF" aria-label="Generar PDF" disabled>
+					<i class="bi bi-file-earmark-pdf text-danger me-2"></i>
+					PDF
+				</button>
+
+				<c:if test="${userRole == 'administrador'}">
+					<!-- Add Button -->
+					<button class="btn btn-custom-primary d-flex align-items-center"
+						data-bs-toggle="modal" data-bs-target="#addCourseModal"
+						aria-label="Agregar curso" disabled>
+						<i class="bi bi-plus-lg me-2"></i>
+						Agregar
+					</button>
+				</c:if>
+			</header>
+
+			<!-- Card Body -->
+			<div class="card-body">
+				<!-- Loading Spinner -->
+				<div id="spinnerLoad"
+					class="d-flex justify-content-center align-items-center h-100">
+					<div class="spinner-border" role="status">
+						<span class="visually-hidden">Cargando...</span>
+					</div>
+				</div>
+
+				<!-- Table Container -->
+				<div id="tableContainer" class="d-none small">
+					<table id="courseTable" class="table table-sm">
+						<thead>
+							<tr>
+								<th scope="col" class="text-start">ID</th>
+								<th scope="col" class="text-start">Nombre</th>
+								<th scope="col" class="text-start">Nivel</th>
+								<th scope="col" class="text-start">Descripción</th>
+								<th scope="col" class="text-center">Estado</th>
+								<th scope="col" class="text-center"></th>
+							</tr>
+						</thead>
+						<tbody id="bodyCourses">
+							<!-- Data will be populated here via JavaScript -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
 	</main>
-	
+
 	<!-- Add Course Modal -->
 	<div class="modal fade" id="addCourseModal" tabindex="-1" aria-labelledby="addCourseModalLabel" aria-hidden="true" data-bs-backdrop="static">
 		<div class="modal-dialog modal-lg">
@@ -326,7 +334,7 @@
 	<div class="toast-container" id="toast-container">
 		<!-- Toasts will be added here by JavaScript -->
 	</div>
-	
+
 	<jsp:include page="WEB-INF/includes/scripts.jsp">
 		<jsp:param name="currentPage" value="courses.js" />
 	</jsp:include>

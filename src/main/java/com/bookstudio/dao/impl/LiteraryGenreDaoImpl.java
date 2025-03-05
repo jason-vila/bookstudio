@@ -12,29 +12,29 @@ import com.bookstudio.models.LiteraryGenre;
 import com.bookstudio.utils.DbConnection;
 
 public class LiteraryGenreDaoImpl implements LiteraryGenreDao {
+	@Override
+	public List<LiteraryGenre> populateLiteraryGenreSelect() {
+		List<LiteraryGenre> literaryGenreList = new ArrayList<>();
 
-    @Override
-    public List<LiteraryGenre> populateLiteraryGenreSelect() {
-        List<LiteraryGenre> literaryGenreList = new ArrayList<>();
-        
-        String sql = """
-            SELECT LiteraryGenreID, GenreName
-            FROM LiteraryGenres
-        """;
-        
-        try (Connection cn = DbConnection.getConexion();
-             PreparedStatement ps = cn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-             
-            while (rs.next()) {
-                LiteraryGenre literaryGenre = new LiteraryGenre();
-                literaryGenre.setLiteraryGenreId(rs.getString("LiteraryGenreID"));
-                literaryGenre.setGenreName(rs.getString("GenreName"));
-                literaryGenreList.add(literaryGenre);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return literaryGenreList;
-    }
+		String sql = """
+				    SELECT LiteraryGenreID, GenreName
+				    FROM LiteraryGenres
+				""";
+
+		try (Connection cn = DbConnection.getConexion();
+				PreparedStatement ps = cn.prepareStatement(sql);
+				ResultSet rs = ps.executeQuery()) {
+
+			while (rs.next()) {
+				LiteraryGenre literaryGenre = new LiteraryGenre();
+				literaryGenre.setLiteraryGenreId(rs.getString("LiteraryGenreID"));
+				literaryGenre.setGenreName(rs.getString("GenreName"));
+				literaryGenreList.add(literaryGenre);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return literaryGenreList;
+	}
 }

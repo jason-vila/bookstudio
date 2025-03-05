@@ -19,12 +19,12 @@ import com.bookstudio.models.LiteraryGenre;
 import com.bookstudio.utils.SelectOptions;
 
 public class AuthorService {
-
     private AuthorDao authorDao = new AuthorDaoImpl();
     private LiteraryGenreDao literaryGenreDao = new LiteraryGenreDaoImpl();
 
     public List<Author> listAuthors() throws Exception {
         List<Author> authorData = authorDao.listAuthors();
+        
         for (Author author : authorData) {
             byte[] photo = author.getPhoto();
             if (photo != null) {
@@ -32,16 +32,19 @@ public class AuthorService {
                 author.setPhotoBase64("data:image/jpeg;base64," + photoBase64);
             }
         }
+        
         return authorData;
     }
     
     public Author getAuthor(String authorId) throws Exception {
         Author author = authorDao.getAuthor(authorId);
         byte[] photo = author.getPhoto();
+        
         if (photo != null) {
             String photoBase64 = Base64.getEncoder().encodeToString(photo);
             author.setPhotoBase64("data:image/jpeg;base64," + photoBase64);
         }
+        
         return author;
     }
     
@@ -76,6 +79,7 @@ public class AuthorService {
             String photoBase64 = Base64.getEncoder().encodeToString(createdAuthor.getPhoto());
             createdAuthor.setPhotoBase64("data:image/jpeg;base64," + photoBase64);
         }
+        
         return createdAuthor;
     }
     
@@ -130,6 +134,7 @@ public class AuthorService {
                 return new String(is.readAllBytes(), "UTF-8");
             }
         }
-        return "";
-    }
+        
+		return "";
+	}
 }
