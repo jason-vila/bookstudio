@@ -32,7 +32,7 @@
 				<!-- Excel Button -->
 				<button
 					class="btn btn-custom-secondary excel d-flex align-items-center me-2"
-					aria-label="Generar Excel" disabled>
+					id="generateExcel" aria-label="Generar Excel" disabled>
 					<i class="bi bi-file-earmark-excel text-success me-2"></i>
 					Excel
 				</button>

@@ -184,22 +184,26 @@ function loadStudents() {
 			let dataTable = setupDataTable('#studentTable');
 
 			if (data && data.length > 0) {
-				$("#generatePDF").prop("disabled", false);
+				$("#generatePDF, #generateExcel").prop("disabled", false);
 			} else {
-				$("#generatePDF").prop("disabled", true);
+				$("#generatePDF, #generateExcel").prop("disabled", true);
 			}
 
 			dataTable.on('draw', function() {
 				const noDataMessage = $("#studentTable").find("td.dataTables_empty").length > 0;
 				if (noDataMessage) {
-					$("#generatePDF").prop("disabled", true);
+					$("#generatePDF, #generateExcel").prop("disabled", true);
 				} else {
-					$("#generatePDF").prop("disabled", false);
+					$("#generatePDF, #generateExcel").prop("disabled", false);
 				}
 			});
 
 			$("#generatePDF").off("click").on("click", function() {
 				generatePDF(dataTable);
+			});
+			
+			$("#generateExcel").off("click").on("click", function() {
+				generateExcel(dataTable);
 			});
 		},
 		error: function(status, error) {
@@ -872,6 +876,96 @@ function generatePDF(dataTable) {
 	});
 
 	doc.output("dataurlnewwindow");
+}
+
+function generateExcel(dataTable) {
+	const workbook = new ExcelJS.Workbook();
+	const worksheet = workbook.addWorksheet('Estudiantes');
+
+	const currentDate = new Date();
+	const dateStr = currentDate.toLocaleDateString('es-ES', {
+		day: '2-digit',
+		month: '2-digit',
+		year: 'numeric'
+	});
+	const timeStr = currentDate.toLocaleTimeString('en-US', {
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: true
+	});
+
+	worksheet.mergeCells('A1:G1');
+	const titleCell = worksheet.getCell('A1');
+	titleCell.value = 'Lista de Estudiantes - BookStudio';
+	titleCell.font = { name: 'Arial', size: 14, bold: true };
+	titleCell.alignment = { horizontal: 'center' };
+
+	worksheet.mergeCells('A2:G2');
+	const dateTimeCell = worksheet.getCell('A2');
+	dateTimeCell.value = `Fecha: ${dateStr}  Hora: ${timeStr}`;
+	dateTimeCell.alignment = { horizontal: 'center' };
+
+	worksheet.columns = [
+		{ key: 'id', width: 10 },
+		{ key: 'dni', width: 15 },
+		{ key: 'nombres', width: 30 },
+		{ key: 'apellidos', width: 30 },
+		{ key: 'telefono', width: 20 },
+		{ key: 'correo', width: 30 },
+		{ key: 'estado', width: 15 }
+	];
+
+	const headerRow = worksheet.getRow(4);
+	headerRow.values = ['ID', 'DNI', 'Nombres', 'Apellidos', 'Teléfono', 'Correo electrónico', 'Estado'];
+	headerRow.eachCell((cell) => {
+		cell.font = { bold: true, color: { argb: 'FFFFFF' } };
+		cell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: '000000' } };
+		cell.alignment = { horizontal: 'left', vertical: 'middle' };
+		cell.border = {
+			top: { style: 'thin', color: { argb: 'FFFFFF' } },
+			bottom: { style: 'thin', color: { argb: 'FFFFFF' } },
+			left: { style: 'thin', color: { argb: 'FFFFFF' } },
+			right: { style: 'thin', color: { argb: 'FFFFFF' } }
+		};
+	});
+
+	const data = dataTable.rows({ search: 'applied' }).nodes().toArray().map(row => {
+		let estado = row.cells[6].innerText.trim();
+		estado = estado.includes("Activo") ? "Activo" : "Inactivo";
+
+		return {
+			id: row.cells[0].innerText.trim(),
+			dni: row.cells[1].innerText.trim(),
+			nombres: row.cells[2].innerText.trim(),
+			apellidos: row.cells[3].innerText.trim(),
+			telefono: row.cells[4].innerText.trim(),
+			correo: row.cells[5].innerText.trim(),
+			estado: estado
+		};
+	});
+
+	data.forEach((item) => {
+		const row = worksheet.addRow(item);
+		const estadoCell = row.getCell(7);
+		if (estadoCell.value === "Activo") {
+			estadoCell.font = { color: { argb: '008000' } };
+			estadoCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'E6F2E6' } };
+		} else {
+			estadoCell.font = { color: { argb: 'FF0000' } };
+			estadoCell.fill = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFE6E6' } };
+		}
+	});
+
+	const dateFileStr = currentDate.toLocaleDateString().replace(/\//g, '-');
+	const filename = `Lista_de_Estudiantes_${dateFileStr}.xlsx`;
+
+	workbook.xlsx.writeBuffer().then(buffer => {
+		const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+		const link = document.createElement('a');
+		link.href = URL.createObjectURL(blob);
+		link.download = filename;
+		link.click();
+	});
 }
 
 /*****************************************
