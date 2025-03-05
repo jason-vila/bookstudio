@@ -110,6 +110,25 @@ The folder structure is organized as follows:
 
 - **`WEB-INF/includes`**: This folder contains reusable JSP components (e.g., `header`, `sidebar`, `buttonTheme`). These are included in the main JSPs to maintain a consistent structure across the application without code duplication.
 
+## 📋 Code Standards
+
+### Commits
+
+Whenever possible, describe your commits to help maintainers analyze changes quickly and efficiently.
+
+- `feat:` - New features  
+- `fix:` - Bug fixes  
+- `docs:` - Documentation updates  
+- `style:` - Formatting changes (spaces, indentation, etc.) that don't affect the code logic  
+- `refactor:` - Code refactoring (improving structure without changing functionality)  
+- `test:` - Adding or modifying tests  
+- `chore:` - Changes to the build process or auxiliary tools  
+
+**Example:**  
+```bash
+feat: add newsletter subscription component
+```
+
 ## ⚙️ Installation and Setup
 
 1. **Clone the Repository:**
@@ -182,6 +201,7 @@ public class DbConnection {
         } catch (Exception e) {
             System.out.println("Error: General exception: " + e.getMessage());
         }
+
         return con;
     }
 }
