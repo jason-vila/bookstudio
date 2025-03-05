@@ -112,21 +112,26 @@ The folder structure is organized as follows:
 
 ## 📋 Code Standards
 
-### Commits
+To maintain clarity and consistency, we use abbreviated tags for commits and full descriptive names for branches. This distinction makes it easier to quickly understand the purpose of each change (commits) and the scope of work on a branch.
 
-Whenever possible, describe your commits to help maintainers analyze changes quickly and efficiently.
+| **Type**         | **Commit Prefix** | **Branch Prefix**           | **Description**                                                     |
+|------------------|-------------------|-----------------------------|---------------------------------------------------------------------|
+| New Features     | `feat:`           | `feature/`                  | Introduce new features                                              |
+| Bug Fixes        | `fix:`            | `fix/`                      | Correct issues or bugs                                              |
+| Documentation    | `docs:`           | `documentation/`            | Update or add documentation                                         |
+| Formatting       | `style:`          | `style/`                    | Code formatting changes that don't affect functionality             |
+| Refactoring      | `refactor:`       | `refactor/`                 | Code refactoring without altering behavior                          |
+| Testing          | `test:`           | `test/`                     | Adding or updating tests                                            |
+| Auxiliary Tasks  | `chore:`          | `chore/`                    | Build process changes or other auxiliary tasks                      |
 
-- `feat:` - New features  
-- `fix:` - Bug fixes  
-- `docs:` - Documentation updates  
-- `style:` - Formatting changes (spaces, indentation, etc.) that don't affect the code logic  
-- `refactor:` - Code refactoring (improving structure without changing functionality)  
-- `test:` - Adding or modifying tests  
-- `chore:` - Changes to the build process or auxiliary tools  
-
-**Example:**  
+**Commit Example:**  
 ```bash
 feat: add newsletter subscription component
+```
+
+**Branch Example:**  
+```bash
+feature/newsletter-subscription
 ```
 
 ## ⚙️ Installation and Setup
